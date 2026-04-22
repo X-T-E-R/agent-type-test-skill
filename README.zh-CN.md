@@ -1,6 +1,6 @@
 # AgentTypeTest
 
-![AgentTypeTest Orbit Core logo](./assets/branding/agent-type-test-orbit-core.svg)
+<img src="./assets/branding/agent-type-test-orbit-core.svg" alt="AgentTypeTest Orbit Core logo" width="220" />
 
 [English README](./README.md)
 
