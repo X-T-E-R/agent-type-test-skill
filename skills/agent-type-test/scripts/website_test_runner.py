@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from datetime import datetime
 from html import escape as html_escape
 import json
@@ -58,6 +58,7 @@ class DttiQuestion:
 class DttiSiteData:
     source_url: str
     characters: dict[str, str]
+    profiles: dict[str, "DttiCharacterProfile"]
     questions: tuple[DttiQuestion, ...]
 
 
@@ -71,6 +72,16 @@ class SixteenPQuestionState:
 class SbtiQuestionState:
     question: Question
     dom_index: int
+
+
+@dataclass(frozen=True)
+class DttiCharacterProfile:
+    key: str
+    display_name: str
+    full_name: str
+    english_name: str
+    book: str
+    psychoanalytic_report: str
 
 
 def _default_session_dir(prefix: str) -> Path:
@@ -127,9 +138,17 @@ def _parse_js_string(raw: str) -> str:
     return json.loads(raw)
 
 
+def _extract_js_string_field(block: str, field_name: str) -> str:
+    match = re.search(rf"{re.escape(field_name)}\s*:\s*(\"(?:[^\"\\\\]|\\\\.)*\")", block, re.DOTALL)
+    if not match:
+        return ""
+    return _parse_js_string(match.group(1))
+
+
 def load_dtti_site_data(url: str = "https://justmonikangel.github.io/-/") -> DttiSiteData:
     html = _fetch_text(url)
     characters_block = _extract_block(html, "const CHARACTERS", "{", "}")
+    profiles_block = _extract_block(html, "const CHARACTER_PROFILES", "{", "}")
     questions_block = _extract_block(html, "const questions", "[", "]")
 
     characters: dict[str, str] = {}
@@ -137,6 +156,22 @@ def load_dtti_site_data(url: str = "https://justmonikangel.github.io/-/") -> Dtt
         characters[key] = value
     if not characters:
         raise ValidationError("failed to parse DTTI characters")
+
+    profiles: dict[str, DttiCharacterProfile] = {}
+    for key, display_name in characters.items():
+        marker = f"[CHARACTERS.{key}]"
+        try:
+            profile_block = _extract_block(profiles_block, marker, "{", "}")
+        except ValidationError:
+            continue
+        profiles[key] = DttiCharacterProfile(
+            key=key,
+            display_name=display_name,
+            full_name=_extract_js_string_field(profile_block, "name") or display_name,
+            english_name=_extract_js_string_field(profile_block, "enName"),
+            book=_extract_js_string_field(profile_block, "book"),
+            psychoanalytic_report=_extract_js_string_field(profile_block, "psychoanalyticReport"),
+        )
 
     question_pattern = re.compile(
         r"\{\s*text:\s*(\"(?:[^\"\\\\]|\\\\.)*\"),\s*traits:\s*\{(.*?)\}\s*\}",
@@ -158,7 +193,7 @@ def load_dtti_site_data(url: str = "https://justmonikangel.github.io/-/") -> Dtt
         )
     if not questions:
         raise ValidationError("failed to parse DTTI questions")
-    return DttiSiteData(source_url=url, characters=characters, questions=tuple(questions))
+    return DttiSiteData(source_url=url, characters=characters, profiles=profiles, questions=tuple(questions))
 
 
 def _question_with_choices(question_id: str, prompt: str, choice_texts: Sequence[str]) -> Question:
@@ -231,6 +266,13 @@ def _build_source_meta(adapter_id: str) -> dict[str, Any]:
         "family": profile.family,
         "status": profile.status,
     }
+
+
+def _build_16p_intro_url(type_code: str) -> str | None:
+    match = re.match(r"^([A-Z]{4})(?:-[AT])?$", type_code.strip().upper())
+    if not match:
+        return None
+    return f"https://www.16personalities.com/{match.group(1).lower()}-personality"
 
 
 def _mode(values: Sequence[str]) -> tuple[str, float]:
@@ -312,12 +354,21 @@ def _build_dtti_view(source: dict[str, Any], data: dict[str, Any]) -> dict[str, 
         )
         for index, item in enumerate(data["rounds"], start=1)
     ]
+    profile = data.get("aggregate_character_profile") or {}
+    guide_meta = []
+    if profile.get("book"):
+        guide_meta.append({"label": "Source Book", "value": profile["book"]})
+    if profile.get("english_name"):
+        guide_meta.append({"label": "English Name", "value": profile["english_name"]})
     return {
         "page_title": "AgentTypeTest · DTTI Report",
         "hero_eyebrow": "AgentTypeTest · DTTI",
         "hero_title": data["aggregate_top_character"],
         "hero_subtitle": f"Profile Consistency: {data['profile_consistency']:.2f}",
         "hero_note": "按网站脚本提取的题库本地计分，再把多轮结果聚合。",
+        "hero_links": [
+            {"label": "Character Guide", "href": "#type-guide"},
+        ],
         "stat_chips": [
             {"label": "Family", "value": source["family"]},
             {"label": "Rounds", "value": str(len(data["rounds"]))},
@@ -325,6 +376,14 @@ def _build_dtti_view(source: dict[str, Any], data: dict[str, Any]) -> dict[str, 
             {"label": "Run Mode", "value": run_mode},
             {"label": "Visual Report", "value": "HTML + SVG"},
         ],
+        "guide_section": {
+            "anchor": "type-guide",
+            "eyebrow": "Character Guide",
+            "title": profile.get("full_name") or data["aggregate_top_character"],
+            "subtitle": profile.get("display_name", data["aggregate_top_character"]),
+            "meta": guide_meta,
+            "paragraphs": [profile.get("psychoanalytic_report", "")] if profile.get("psychoanalytic_report") else [],
+        },
         "cards_heading": "Aggregate Scores",
         "cards": score_cards,
         "detail_heading": "",
@@ -336,17 +395,21 @@ def _build_dtti_view(source: dict[str, Any], data: dict[str, Any]) -> dict[str, 
     }
 
 
-def _aggregate_dtti(source: dict[str, Any], rounds: list[dict[str, Any]]) -> dict[str, Any]:
+def _aggregate_dtti(source: dict[str, Any], rounds: list[dict[str, Any]], site_data: DttiSiteData) -> dict[str, Any]:
     aggregate_scores: dict[str, float] = {}
     for round_result in rounds:
         for label, value in round_result["scores"].items():
             aggregate_scores[label] = aggregate_scores.get(label, 0.0) + value
-    top_labels = [item["top_character"] for item in rounds]
-    aggregate_top, profile_consistency = _mode(top_labels)
+    top_keys = [item["top_character_key"] for item in rounds]
+    aggregate_top_key, profile_consistency = _mode(top_keys)
+    aggregate_top = site_data.characters.get(aggregate_top_key, rounds[0]["top_character"] if rounds else "")
+    profile = site_data.profiles.get(aggregate_top_key)
     data = {
+        "aggregate_top_character_key": aggregate_top_key,
         "aggregate_top_character": aggregate_top,
         "aggregate_scores": dict(sorted(aggregate_scores.items(), key=lambda item: item[1], reverse=True)),
         "profile_consistency": profile_consistency,
+        "aggregate_character_profile": asdict(profile) if profile else None,
         "rounds": rounds,
     }
     return {
@@ -477,6 +540,13 @@ def _build_16p_view(source: dict[str, Any], data: dict[str, Any]) -> dict[str, A
             f"{dimension['name']} {dimension['percent']}% {dimension['winner']}" for dimension in item["dimensions"]
         )
         round_rows.append((f"Round {index}", f"{item['type_code']} · {item['type_name']}", snapshot))
+    hero_links = []
+    representative_round = next((item for item in data["rounds"] if item["type_code"] == data["aggregate_type_code"]), None)
+    if representative_round and representative_round.get("profile_url"):
+        hero_links.append({"label": "Result Page", "href": representative_round["profile_url"]})
+    intro_url = _build_16p_intro_url(data["aggregate_type_code"])
+    if intro_url:
+        hero_links.append({"label": "Type Guide", "href": intro_url})
     autofill_note = ""
     if data["average_auto_filled_questions"] > 0:
         autofill_note = f"；平均有 {data['average_auto_filled_questions']:.0f} 题由适配器用中立项补齐"
@@ -486,6 +556,7 @@ def _build_16p_view(source: dict[str, Any], data: dict[str, Any]) -> dict[str, A
         "hero_title": data["aggregate_type_code"],
         "hero_subtitle": f"{data['aggregate_type_name']} · Profile consistency {data['profile_consistency']:.2f}",
         "hero_note": f"真实网站浏览器流程跑完 60 题并读取结果页{autofill_note}。",
+        "hero_links": hero_links,
         "stat_chips": [
             {"label": "Family", "value": source["family"]},
             {"label": "Rounds", "value": str(len(data["rounds"]))},
@@ -654,6 +725,10 @@ def _build_sbti_view(source: dict[str, Any], data: dict[str, Any]) -> dict[str, 
         )
         for index, item in enumerate(data["rounds"], start=1)
     ]
+    representative_round = next((item for item in data["rounds"] if item["type_display"] == data["aggregate_type_display"]), None)
+    guide_paragraphs = []
+    if representative_round and representative_round.get("analysis"):
+        guide_paragraphs.append(representative_round["analysis"])
     autofill_note = ""
     if data["average_auto_filled_questions"] > 0:
         autofill_note = f"；平均有 {data['average_auto_filled_questions']:.0f} 题由适配器补齐"
@@ -663,6 +738,9 @@ def _build_sbti_view(source: dict[str, Any], data: dict[str, Any]) -> dict[str, 
         "hero_title": data["aggregate_type_display"],
         "hero_subtitle": f"Profile consistency: {data['profile_consistency']:.2f}",
         "hero_note": f"真实 B 站活动页答题并读取结果页{autofill_note}。",
+        "hero_links": [
+            {"label": "Type Guide", "href": "#type-guide"},
+        ],
         "stat_chips": [
             {"label": "Rounds", "value": str(len(data["rounds"]))},
             {"label": "Run Mode", "value": run_mode},
@@ -670,6 +748,14 @@ def _build_sbti_view(source: dict[str, Any], data: dict[str, Any]) -> dict[str, 
             {"label": "AI-Answered", "value": f"{data['average_asked_questions']:.0f} / 31"},
             {"label": "Auto-Filled", "value": f"{data['average_auto_filled_questions']:.0f} / 31"},
         ],
+        "guide_section": {
+            "anchor": "type-guide",
+            "eyebrow": "Type Guide",
+            "title": data["aggregate_type_display"],
+            "subtitle": (representative_round or {}).get("type_subname") or (representative_round or {}).get("poster_caption", ""),
+            "meta": [{"label": "Source", "value": source["label"]}],
+            "paragraphs": guide_paragraphs,
+        },
         "cards_heading": "Top Dimensions",
         "cards": cards,
         "detail_heading": "Aggregate Dimensions",
@@ -728,6 +814,9 @@ def _render_markdown(report: dict[str, Any]) -> str:
         f"- Result: `{view['hero_title']}`",
         f"- Summary: {view['hero_subtitle']}",
     ]
+    if view.get("hero_links"):
+        for link in view["hero_links"]:
+            lines.append(f"- {link['label']}: [{link['href']}]({link['href']})")
     if view.get("hero_note"):
         lines.append(f"- Note: {view['hero_note']}")
     if view.get("stat_chips"):
@@ -739,6 +828,20 @@ def _render_markdown(report: dict[str, Any]) -> str:
         for card in view["cards"]:
             detail = f" ({card['detail']})" if card.get("detail") else ""
             lines.append(f"- {card['label']}: `{card['value']}`{detail}")
+    guide = view.get("guide_section")
+    if guide:
+        lines.extend(["", f"## {guide['title']}", ""])
+        if guide.get("subtitle"):
+            lines.append(guide["subtitle"])
+            lines.append("")
+        for item in guide.get("meta", []):
+            lines.append(f"- {item['label']}: {item['value']}")
+        if guide.get("meta"):
+            lines.append("")
+        for paragraph in guide.get("paragraphs", []):
+            if paragraph:
+                lines.append(paragraph)
+                lines.append("")
     if view.get("detail_rows"):
         lines.extend(["", f"## {view['detail_heading']}", ""])
         for row in view["detail_rows"]:
@@ -779,6 +882,14 @@ def _render_html(report: dict[str, Any]) -> str:
         """
         for item in view.get("stat_chips", [])
     )
+    hero_links = ""
+    if view.get("hero_links"):
+        hero_links = '<div class="hero-links">' + "".join(
+            f'<a class="hero-link" href="{html_escape(str(item["href"]))}"'
+            + (' target="_blank" rel="noopener noreferrer"' if str(item["href"]).startswith("http") else "")
+            + f'>{html_escape(str(item["label"]))}</a>'
+            for item in view["hero_links"]
+        ) + "</div>"
     detail_section = ""
     if view.get("detail_rows"):
         detail_section = f"""
@@ -811,6 +922,27 @@ def _render_html(report: dict[str, Any]) -> str:
         <section>
           <div class="section-kicker">{html_escape(view['cards_heading'])}</div>
           <div class="card-grid">{render_cards(view['cards'])}</div>
+        </section>
+        """
+    guide_section = ""
+    if view.get("guide_section"):
+        guide = view["guide_section"]
+        guide_meta = ""
+        if guide.get("meta"):
+            guide_meta = '<div class="guide-meta">' + "".join(
+                f'<div class="guide-meta-item"><span>{html_escape(str(item["label"]))}</span><strong>{html_escape(str(item["value"]))}</strong></div>'
+                for item in guide["meta"]
+            ) + "</div>"
+        guide_paragraphs = "".join(
+            f"<p>{html_escape(str(paragraph))}</p>" for paragraph in guide.get("paragraphs", []) if paragraph
+        )
+        guide_section = f"""
+        <section class="panel" id="{html_escape(str(guide.get('anchor', 'type-guide')))}">
+          <div class="section-kicker">{html_escape(str(guide.get('eyebrow', 'Type Guide')))}</div>
+          <div class="guide-title">{html_escape(str(guide.get('title', '')))}</div>
+          {f'<div class="guide-subtitle">{html_escape(str(guide.get("subtitle", "")))}</div>' if guide.get("subtitle") else ""}
+          {guide_meta}
+          <div class="guide-copy">{guide_paragraphs}</div>
         </section>
         """
     hero_note = f'<div class="hero-note">{html_escape(view["hero_note"])}</div>' if view.get("hero_note") else ""
@@ -905,6 +1037,26 @@ def _render_html(report: dict[str, Any]) -> str:
       gap: 12px;
       margin-top: 22px;
     }}
+    .hero-links {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }}
+    .hero-link {{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(240,164,75,0.28);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: #ffd59d;
+      text-decoration: none;
+      background: rgba(255,255,255,0.04);
+    }}
+    .hero-link:hover {{
+      background: rgba(255,255,255,0.08);
+    }}
     .stat-chip {{
       border: 1px solid var(--line);
       border-radius: 16px;
@@ -967,6 +1119,50 @@ def _render_html(report: dict[str, Any]) -> str:
       padding: 18px;
       background: var(--panel-solid);
     }}
+    .guide-title {{
+      font-size: 30px;
+      color: var(--accent);
+      line-height: 1.2;
+    }}
+    .guide-subtitle {{
+      margin-top: 8px;
+      color: #f3ddc2;
+      line-height: 1.6;
+    }}
+    .guide-meta {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }}
+    .guide-meta-item {{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.03);
+    }}
+    .guide-meta-item span {{
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }}
+    .guide-meta-item strong {{
+      display: block;
+      margin-top: 8px;
+      font-size: 18px;
+      color: var(--ink);
+      font-weight: normal;
+    }}
+    .guide-copy {{
+      margin-top: 18px;
+      color: var(--muted);
+      line-height: 1.9;
+    }}
+    .guide-copy p {{
+      margin: 0 0 14px;
+    }}
     table {{
       width: 100%;
       border-collapse: collapse;
@@ -1005,9 +1201,11 @@ def _render_html(report: dict[str, Any]) -> str:
         <div><a class="source-link" href="{html_escape(report['source']['entry_url'])}" target="_blank" rel="noopener noreferrer">{html_escape(report['source']['label'])} · {html_escape(report['source']['entry_url'])}</a></div>
         <div class="source-intro">{html_escape(report['source']['short_intro'])}</div>
       </div>
+      {hero_links}
       <div class="stats">{stat_chips}</div>
     </section>
     {cards_section}
+    {guide_section}
     {detail_section}
     {round_section}
   </div>
@@ -1083,7 +1281,7 @@ def _run_dtti(args: argparse.Namespace, session_dir: Path) -> dict[str, Any]:
         summary = _summarize_dtti_round(site_data, answers_by_id, question_lookup)
         _write_json(round_dir / "summary.json", summary)
         round_results.append(summary)
-    return _aggregate_dtti(source, round_results)
+    return _aggregate_dtti(source, round_results, site_data)
 
 
 def _run_16personalities(args: argparse.Namespace, session_dir: Path) -> dict[str, Any]:
