@@ -94,6 +94,10 @@ def _write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _load_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def _enforce_full_length_default(limit_questions: int | None, allow_partial_run: bool) -> None:
     if limit_questions is not None and not allow_partial_run:
         raise ValidationError(
@@ -226,12 +230,17 @@ def _chunked(items: Sequence[Any], size: int) -> list[list[Any]]:
 
 def _render_packet(batch: Sequence[Question], round_index: int, batch_index: int) -> dict[str, Any]:
     prompt_lines = [
-        "You are answering a short questionnaire.",
+        "You are the test subject for this short questionnaire.",
+        "Answer as yourself, based on your own current preferences, instincts, and habits.",
+        "Pick the option that best matches how you would actually respond right now.",
         "Answer the current batch only.",
         "Return JSON only.",
         'Use this exact shape: {"answers":[{"id":"question-id","choice":"A"}]}',
         "Do not explain your reasoning.",
+        "Do not evaluate, install, audit, debug, or verify the project while answering.",
+        "Do not search for answer keys, scoring rules, or the full questionnaire.",
         "Do not guess the test family, test name, hidden intent, or scoring logic.",
+        "Do not copy the questions back or rewrite the options as commentary.",
         "Do not add commentary, analysis, caveats, or meta-observations.",
         "",
     ]
@@ -274,6 +283,82 @@ def _build_source_meta(adapter_id: str) -> dict[str, Any]:
         "family": profile.family,
         "status": profile.status,
     }
+
+
+def _write_self_session_instructions(session_dir: Path, source: dict[str, Any]) -> None:
+    lines = [
+        "# AgentTypeTest Website Self Session",
+        "",
+        f"- Adapter: `{source['id']}`",
+        f"- Label: {source['label']}",
+        f"- Entry URL: {source['entry_url']}",
+        "",
+        "1. Open one `batch-XX.packet.json` file at a time.",
+        "2. Read the `prompt_text` field and answer as the tested agent itself.",
+        "3. Save the JSON answer to the matching `batch-XX.response.json` path in the same folder.",
+        "4. Do not inspect answer keys, scoring rules, or the full questionnaire while answering.",
+        "5. After every batch has a matching `.response.json`, run `finalize-session` on this session directory.",
+        "",
+        'Expected JSON shape: {"answers":[{"id":"question-id","choice":"A"}]}',
+        "",
+    ]
+    (session_dir / "session.instructions.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+def _select_question_slice(items: Sequence[Any], limit_questions: int | None) -> tuple[list[Any], list[Any]]:
+    ordered = list(items)
+    if limit_questions is None:
+        return ordered, []
+    return ordered[:limit_questions], ordered[limit_questions:]
+
+
+def _write_session_plan(
+    session_dir: Path,
+    adapter: str,
+    batch_size: int,
+    limit_questions: int | None,
+    rounds: int,
+    seed: int | None,
+) -> None:
+    _write_json(
+        session_dir / "session.plan.json",
+        {
+            "mode": "website-self-session",
+            "adapter": adapter,
+            "batch_size": batch_size,
+            "limit_questions": limit_questions,
+            "rounds": rounds,
+            "seed": seed,
+        },
+    )
+
+
+def _load_session_plan(session_dir: Path) -> dict[str, Any]:
+    plan_path = session_dir / "session.plan.json"
+    if not plan_path.exists():
+        raise ValidationError(f"missing session plan: {plan_path}")
+    return _load_json(plan_path)
+
+
+def _read_packet_responses(
+    round_dir: Path,
+    batch_states: Sequence[Any],
+    batch_counter: int,
+) -> tuple[dict[str, Any], dict[str, str]]:
+    packet_path = round_dir / f"batch-{batch_counter:02d}.packet.json"
+    response_path = round_dir / f"batch-{batch_counter:02d}.response.json"
+    if not packet_path.exists():
+        raise ValidationError(f"missing packet file: {packet_path}")
+    if not response_path.exists():
+        raise ValidationError(f"missing response file: {response_path}")
+    packet = _load_json(packet_path)
+    expected_ids = [state.question.id for state in batch_states]
+    packet_ids = [str(item.get("id", "")).strip() for item in packet.get("questions", [])]
+    if packet_ids != expected_ids:
+        raise ValidationError(f"packet batch does not match extracted site questions: {packet_path}")
+    normalized = normalize_answers(_load_json(response_path), [state.question for state in batch_states])
+    _write_json(round_dir / f"batch-{batch_counter:02d}.answers.json", normalized)
+    return packet, normalized
 
 
 def _build_16p_intro_url(type_code: str) -> str | None:
@@ -1456,6 +1541,392 @@ def _run_sbti(args: argparse.Namespace, session_dir: Path) -> dict[str, Any]:
     return _aggregate_sbti(source, round_results)
 
 
+def _prepare_dtti_session(args: argparse.Namespace, session_dir: Path) -> None:
+    source = _build_source_meta("dtti")
+    site_data = load_dtti_site_data()
+    _write_json(
+        session_dir / "site.snapshot.json",
+        {
+            "source_url": site_data.source_url,
+            "characters": site_data.characters,
+            "adapter": source,
+        },
+    )
+    _write_self_session_instructions(session_dir, source)
+    _write_session_plan(session_dir, "dtti", args.batch_size, args.limit_questions, args.rounds, args.seed)
+    for round_index in range(1, args.rounds + 1):
+        seed = args.seed + round_index - 1 if args.seed is not None else None
+        ordered_questions = list(site_data.questions)
+        random.Random(seed).shuffle(ordered_questions)
+        asked_questions, fill_questions = _select_question_slice(ordered_questions, args.limit_questions)
+        round_dir = session_dir / f"round-{round_index:02d}"
+        round_dir.mkdir(parents=True, exist_ok=True)
+        batch_counter = 0
+        for batch in _chunked([_dtti_transport_question(item) for item in asked_questions], args.batch_size):
+            batch_counter += 1
+            packet = _render_packet(batch, round_index, batch_counter)
+            _write_json(round_dir / f"batch-{batch_counter:02d}.packet.json", packet)
+        _write_json(
+            round_dir / "round.plan.json",
+            {
+                "asked_questions": len(asked_questions),
+                "auto_filled_questions": len(fill_questions),
+                "total_questions": len(ordered_questions),
+                "batch_count": batch_counter,
+            },
+        )
+
+
+def _finalize_dtti_session(session_dir: Path, plan: dict[str, Any]) -> dict[str, Any]:
+    source = _build_source_meta("dtti")
+    site_data = load_dtti_site_data()
+    question_lookup = {question.id: question for question in site_data.questions}
+    round_results: list[dict[str, Any]] = []
+    for round_index in range(1, int(plan["rounds"]) + 1):
+        round_dir = session_dir / f"round-{round_index:02d}"
+        if not round_dir.exists():
+            raise ValidationError(f"missing round directory: {round_dir}")
+        answers_by_id: dict[str, str] = {}
+        for batch_counter, packet_path in enumerate(sorted(round_dir.glob("batch-*.packet.json")), start=1):
+            packet = _load_json(packet_path)
+            questions = [question_lookup[str(item["id"]).strip()] for item in packet.get("questions", [])]
+            if not questions:
+                raise ValidationError(f"packet does not contain questions: {packet_path}")
+            response_path = round_dir / packet_path.name.replace(".packet.json", ".response.json")
+            if not response_path.exists():
+                raise ValidationError(f"missing response file: {response_path}")
+            normalized = normalize_answers(_load_json(response_path), [_dtti_transport_question(item) for item in questions])
+            _write_json(round_dir / f"batch-{batch_counter:02d}.answers.json", normalized)
+            answers_by_id.update(normalized)
+        summary = _summarize_dtti_round(site_data, answers_by_id, question_lookup)
+        _write_json(round_dir / "summary.json", summary)
+        round_results.append(summary)
+    return _aggregate_dtti(source, round_results, site_data)
+
+
+def _prepare_16p_session(args: argparse.Namespace, session_dir: Path) -> None:
+    _require_playwright()
+    source = _build_source_meta("16personalities")
+    _write_self_session_instructions(session_dir, source)
+    _write_session_plan(session_dir, "16personalities", args.batch_size, args.limit_questions, args.rounds, args.seed)
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=not args.show_browser)
+        for round_index in range(1, args.rounds + 1):
+            round_dir = session_dir / f"round-{round_index:02d}"
+            round_dir.mkdir(parents=True, exist_ok=True)
+            context = browser.new_context(viewport={"width": 1440, "height": 1800})
+            page = context.new_page()
+            try:
+                page.goto(source["discovery_url"], wait_until="domcontentloaded", timeout=args.timeout_ms)
+                _safe_wait_for_network_idle(page, args.timeout_ms)
+                page.wait_for_timeout(1500)
+                completed_ids: set[str] = set()
+                asked_questions = 0
+                auto_filled_questions = 0
+                batch_counter = 0
+                for _step in range(20):
+                    active_states = [state for state in _extract_16p_active_questions(page) if state.question.id not in completed_ids]
+                    remaining = None if args.limit_questions is None else max(args.limit_questions - asked_questions, 0)
+                    ask_states_raw, fill_states_raw = _select_question_slice(active_states, remaining)
+                    ask_states = [state for state in ask_states_raw if isinstance(state, SixteenPQuestionState)]
+                    fill_states = [state for state in fill_states_raw if isinstance(state, SixteenPQuestionState)]
+                    asked_questions += len(ask_states)
+                    auto_filled_questions += len(fill_states)
+
+                    for batch_states_raw in _chunked(ask_states, args.batch_size) if ask_states else []:
+                        batch_states = [state for state in batch_states_raw if isinstance(state, SixteenPQuestionState)]
+                        batch_counter += 1
+                        packet = _render_packet([state.question for state in batch_states], round_index, batch_counter)
+                        _write_json(round_dir / f"batch-{batch_counter:02d}.packet.json", packet)
+
+                    for state in active_states:
+                        _apply_16p_choice(page, state, _default_choice_id(len(state.question.choices)))
+                        completed_ids.add(state.question.id)
+
+                    next_button = page.locator('button:has-text("Next")')
+                    see_results = page.locator('button:has-text("See results")')
+                    if next_button.count() and next_button.first.is_visible():
+                        next_button.first.click(force=True)
+                        page.wait_for_timeout(700)
+                        continue
+                    if see_results.count() and see_results.first.is_visible():
+                        see_results.first.click(force=True)
+                        page.wait_for_url(re.compile(r".*/profiles/.*"), timeout=args.timeout_ms)
+                        page.locator("header.sp-typeheader").first.wait_for(timeout=args.timeout_ms)
+                        break
+                    if "/profiles/" in page.url:
+                        break
+                else:
+                    raise ValidationError("16Personalities prepare flow did not reach the result page")
+
+                _write_json(
+                    round_dir / "round.plan.json",
+                    {
+                        "asked_questions": asked_questions,
+                        "auto_filled_questions": auto_filled_questions,
+                        "total_questions": len(completed_ids),
+                        "batch_count": batch_counter,
+                    },
+                )
+                if round_index == 1:
+                    _write_json(
+                        session_dir / "site.snapshot.json",
+                        {
+                            "adapter": source,
+                            "question_count": len(completed_ids),
+                            "implementation": "browser-flow",
+                        },
+                    )
+            finally:
+                context.close()
+        browser.close()
+
+
+def _finalize_16p_session(args: argparse.Namespace, session_dir: Path, plan: dict[str, Any]) -> dict[str, Any]:
+    _require_playwright()
+    source = _build_source_meta("16personalities")
+    round_results: list[dict[str, Any]] = []
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=not args.show_browser)
+        for round_index in range(1, int(plan["rounds"]) + 1):
+            round_dir = session_dir / f"round-{round_index:02d}"
+            if not round_dir.exists():
+                raise ValidationError(f"missing round directory: {round_dir}")
+            context = browser.new_context(viewport={"width": 1440, "height": 1800})
+            page = context.new_page()
+            try:
+                page.goto(source["discovery_url"], wait_until="domcontentloaded", timeout=args.timeout_ms)
+                _safe_wait_for_network_idle(page, args.timeout_ms)
+                page.wait_for_timeout(1500)
+                completed_ids: set[str] = set()
+                asked_questions = 0
+                auto_filled_questions = 0
+                batch_counter = 0
+                merged_answers: dict[str, str] = {}
+                for _step in range(20):
+                    active_states = [state for state in _extract_16p_active_questions(page) if state.question.id not in completed_ids]
+                    remaining = None if plan.get("limit_questions") is None else max(int(plan["limit_questions"]) - asked_questions, 0)
+                    ask_states_raw, fill_states_raw = _select_question_slice(active_states, remaining)
+                    ask_states = [state for state in ask_states_raw if isinstance(state, SixteenPQuestionState)]
+                    fill_states = [state for state in fill_states_raw if isinstance(state, SixteenPQuestionState)]
+
+                    for batch_states_raw in _chunked(ask_states, int(plan["batch_size"])) if ask_states else []:
+                        batch_states = [state for state in batch_states_raw if isinstance(state, SixteenPQuestionState)]
+                        batch_counter += 1
+                        _packet, normalized = _read_packet_responses(round_dir, batch_states, batch_counter)
+                        for state in batch_states:
+                            choice_id = normalized[state.question.id]
+                            _apply_16p_choice(page, state, choice_id)
+                            merged_answers[state.question.id] = choice_id
+                            completed_ids.add(state.question.id)
+                            asked_questions += 1
+
+                    for state in fill_states:
+                        choice_id = _default_choice_id(len(state.question.choices))
+                        _apply_16p_choice(page, state, choice_id)
+                        merged_answers[state.question.id] = choice_id
+                        completed_ids.add(state.question.id)
+                        auto_filled_questions += 1
+
+                    next_button = page.locator('button:has-text("Next")')
+                    see_results = page.locator('button:has-text("See results")')
+                    if next_button.count() and next_button.first.is_visible():
+                        next_button.first.click(force=True)
+                        page.wait_for_timeout(700)
+                        continue
+                    if see_results.count() and see_results.first.is_visible():
+                        see_results.first.click(force=True)
+                        page.wait_for_url(re.compile(r".*/profiles/.*"), timeout=args.timeout_ms)
+                        page.locator("header.sp-typeheader").first.wait_for(timeout=args.timeout_ms)
+                        break
+                    if "/profiles/" in page.url:
+                        break
+                else:
+                    raise ValidationError("16Personalities finalize flow did not reach the result page")
+
+                result = _extract_16p_result(page)
+                result["asked_questions"] = asked_questions
+                result["auto_filled_questions"] = auto_filled_questions
+                _write_json(round_dir / "answers.merged.json", merged_answers)
+                _write_json(round_dir / "summary.json", result)
+                (round_dir / "result.snapshot.html").write_text(page.content(), encoding="utf-8")
+                round_results.append(result)
+            finally:
+                context.close()
+        browser.close()
+    return _aggregate_16p(source, round_results)
+
+
+def _prepare_sbti_session(args: argparse.Namespace, session_dir: Path) -> None:
+    _require_playwright()
+    source = _build_source_meta("sbti-bilibili")
+    _write_self_session_instructions(session_dir, source)
+    _write_session_plan(session_dir, "sbti-bilibili", args.batch_size, args.limit_questions, args.rounds, args.seed)
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=not args.show_browser)
+        for round_index in range(1, args.rounds + 1):
+            round_dir = session_dir / f"round-{round_index:02d}"
+            round_dir.mkdir(parents=True, exist_ok=True)
+            context = browser.new_context(viewport={"width": 1440, "height": 2200})
+            page = context.new_page()
+            try:
+                page.goto(source["discovery_url"], wait_until="domcontentloaded", timeout=args.timeout_ms)
+                _safe_wait_for_network_idle(page, args.timeout_ms)
+                page.wait_for_timeout(1000)
+                page.locator('button:has-text("开始测试")').first.click(force=True)
+                page.locator(".question-item").first.wait_for(timeout=args.timeout_ms)
+                page.wait_for_timeout(500)
+                question_states = _extract_sbti_questions(page)
+                ordered_states = list(question_states)
+                if args.seed is not None:
+                    rng = random.Random(args.seed + round_index - 1)
+                    rng.shuffle(ordered_states)
+                ask_states_raw, fill_states_raw = _select_question_slice(ordered_states, args.limit_questions)
+                ask_states = [state for state in ask_states_raw if isinstance(state, SbtiQuestionState)]
+                fill_states = [state for state in fill_states_raw if isinstance(state, SbtiQuestionState)]
+                batch_counter = 0
+                for batch_states_raw in _chunked(ask_states, args.batch_size):
+                    batch_states = [state for state in batch_states_raw if isinstance(state, SbtiQuestionState)]
+                    batch_counter += 1
+                    packet = _render_packet([state.question for state in batch_states], round_index, batch_counter)
+                    _write_json(round_dir / f"batch-{batch_counter:02d}.packet.json", packet)
+                _write_json(
+                    round_dir / "round.plan.json",
+                    {
+                        "asked_questions": len(ask_states),
+                        "auto_filled_questions": len(fill_states),
+                        "total_questions": len(question_states),
+                        "batch_count": batch_counter,
+                    },
+                )
+                if round_index == 1:
+                    _write_json(
+                        session_dir / "site.snapshot.json",
+                        {
+                            "adapter": source,
+                            "question_count": len(question_states),
+                            "implementation": "browser-flow",
+                        },
+                    )
+            finally:
+                context.close()
+        browser.close()
+
+
+def _finalize_sbti_session(args: argparse.Namespace, session_dir: Path, plan: dict[str, Any]) -> dict[str, Any]:
+    _require_playwright()
+    source = _build_source_meta("sbti-bilibili")
+    round_results: list[dict[str, Any]] = []
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=not args.show_browser)
+        for round_index in range(1, int(plan["rounds"]) + 1):
+            round_dir = session_dir / f"round-{round_index:02d}"
+            if not round_dir.exists():
+                raise ValidationError(f"missing round directory: {round_dir}")
+            context = browser.new_context(viewport={"width": 1440, "height": 2200})
+            page = context.new_page()
+            try:
+                page.goto(source["discovery_url"], wait_until="domcontentloaded", timeout=args.timeout_ms)
+                _safe_wait_for_network_idle(page, args.timeout_ms)
+                page.wait_for_timeout(1000)
+                page.locator('button:has-text("开始测试")').first.click(force=True)
+                page.locator(".question-item").first.wait_for(timeout=args.timeout_ms)
+                page.wait_for_timeout(500)
+                question_states = _extract_sbti_questions(page)
+                ordered_states = list(question_states)
+                if plan.get("seed") is not None:
+                    rng = random.Random(int(plan["seed"]) + round_index - 1)
+                    rng.shuffle(ordered_states)
+                ask_states_raw, fill_states_raw = _select_question_slice(ordered_states, plan.get("limit_questions"))
+                ask_states = [state for state in ask_states_raw if isinstance(state, SbtiQuestionState)]
+                fill_states = [state for state in fill_states_raw if isinstance(state, SbtiQuestionState)]
+
+                merged_answers: dict[str, str] = {}
+                batch_counter = 0
+                for batch_states_raw in _chunked(ask_states, int(plan["batch_size"])):
+                    batch_states = [state for state in batch_states_raw if isinstance(state, SbtiQuestionState)]
+                    batch_counter += 1
+                    _packet, normalized = _read_packet_responses(round_dir, batch_states, batch_counter)
+                    for state in batch_states:
+                        choice_id = normalized[state.question.id]
+                        _apply_sbti_choice(page, state, choice_id)
+                        merged_answers[state.question.id] = choice_id
+
+                auto_filled_questions = 0
+                for state in fill_states:
+                    choice_id = _default_choice_id(len(state.question.choices))
+                    _apply_sbti_choice(page, state, choice_id)
+                    merged_answers[state.question.id] = choice_id
+                    auto_filled_questions += 1
+
+                page.wait_for_timeout(600)
+                submit = page.locator('button:has-text("提交并查看结果")').first
+                submit.click(force=True)
+                page.locator(".result-wrap:visible .type-name").first.wait_for(timeout=args.timeout_ms)
+                page.wait_for_timeout(1000)
+                result = _extract_sbti_result(page)
+                result["asked_questions"] = len(ask_states)
+                result["auto_filled_questions"] = auto_filled_questions
+                _write_json(round_dir / "answers.merged.json", merged_answers)
+                _write_json(round_dir / "summary.json", result)
+                (round_dir / "result.snapshot.html").write_text(page.content(), encoding="utf-8")
+                round_results.append(result)
+            finally:
+                context.close()
+        browser.close()
+    return _aggregate_sbti(source, round_results)
+
+
+def cmd_prepare_session(args: argparse.Namespace) -> int:
+    session_dir = Path(args.session_dir).resolve() if args.session_dir else _default_session_dir(f"website-session-{args.adapter}").resolve()
+    session_dir.mkdir(parents=True, exist_ok=True)
+    if args.adapter == "dtti":
+        _prepare_dtti_session(args, session_dir)
+    elif args.adapter == "16personalities":
+        _prepare_16p_session(args, session_dir)
+    elif args.adapter == "sbti-bilibili":
+        _prepare_sbti_session(args, session_dir)
+    else:
+        raise ValidationError(f"unsupported adapter: {args.adapter}")
+    print(f"Prepared self-test session: {session_dir}")
+    print(f"Instructions: {session_dir / 'session.instructions.md'}")
+    print("Next step: answer each batch-XX.packet.json as the tested agent and save JSON to the matching batch-XX.response.json file.")
+    print(f"Then run: python website_test_runner.py finalize-session --session-dir \"{session_dir}\"")
+    return 0
+
+
+def cmd_finalize_session(args: argparse.Namespace) -> int:
+    session_dir = Path(args.session_dir).resolve()
+    if not session_dir.exists():
+        raise ValidationError(f"session directory does not exist: {session_dir}")
+    plan = _load_session_plan(session_dir)
+    adapter = str(plan.get("adapter", "")).strip()
+    if adapter not in {"dtti", "16personalities", "sbti-bilibili"}:
+        raise ValidationError(f"unsupported adapter in session plan: {adapter}")
+    try:
+        if adapter == "dtti":
+            report = _finalize_dtti_session(session_dir, plan)
+        elif adapter == "16personalities":
+            report = _finalize_16p_session(args, session_dir, plan)
+        else:
+            report = _finalize_sbti_session(args, session_dir, plan)
+    except PlaywrightError as exc:
+        raise ValidationError(
+            "browser-backed adapter failed. If Chromium is missing, run `python -m playwright install chromium` first. "
+            f"Details: {exc}"
+        ) from exc
+    _write_report_artifacts(session_dir, report)
+    auto_filled = report["data"].get("average_auto_filled_questions")
+    run_mode = "partial-debug" if isinstance(auto_filled, (int, float)) and auto_filled > 0 else "full"
+    print(f"Report JSON: {session_dir / 'report.json'}")
+    print(f"Report HTML: {session_dir / 'report.html'}")
+    print(f"Report SVG: {session_dir / 'report.svg'}")
+    print(f"Run mode: {run_mode}")
+    print(f"Aggregate result: {report['view']['hero_title']}")
+    print(f"Summary: {report['view']['hero_subtitle']}")
+    return 0
+
+
 def _write_report_artifacts(session_dir: Path, report: dict[str, Any]) -> None:
     _write_json(session_dir / "report.json", report)
     (session_dir / "report.md").write_text(_render_markdown(report), encoding="utf-8")
@@ -1518,13 +1989,47 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--show-browser", action="store_true", help="Show the browser while browser-backed adapters run")
     run.add_argument("--timeout-ms", type=int, default=60000, help="Browser wait timeout in milliseconds")
     run.set_defaults(func=cmd_run)
+
+    prepare_session = subparsers.add_parser(
+        "prepare-session",
+        help="Prepare a non-interactive website self-test session for the current agent to answer in files",
+    )
+    prepare_session.add_argument("--adapter", required=True, choices=("dtti", "16personalities", "sbti-bilibili"))
+    prepare_session.add_argument("--batch-size", type=int, default=4)
+    prepare_session.add_argument(
+        "--limit-questions",
+        type=int,
+        default=None,
+        help="Debug or extreme-short-run cap. Default behavior is a full website run; setting this lower requires --allow-partial-run.",
+    )
+    prepare_session.add_argument(
+        "--allow-partial-run",
+        action="store_true",
+        help="Required together with --limit-questions when the user explicitly wants a shorter run.",
+    )
+    prepare_session.add_argument("--rounds", type=int, default=1)
+    prepare_session.add_argument("--seed", type=int, default=None)
+    prepare_session.add_argument("--session-dir", default=None)
+    prepare_session.add_argument("--show-browser", action="store_true", help="Show the browser while browser-backed adapters run")
+    prepare_session.add_argument("--timeout-ms", type=int, default=60000, help="Browser wait timeout in milliseconds")
+    prepare_session.set_defaults(func=cmd_prepare_session)
+
+    finalize_session = subparsers.add_parser(
+        "finalize-session",
+        help="Finalize a prepared website self-test session after response files have been written",
+    )
+    finalize_session.add_argument("--session-dir", required=True)
+    finalize_session.add_argument("--show-browser", action="store_true", help="Show the browser while browser-backed adapters run")
+    finalize_session.add_argument("--timeout-ms", type=int, default=60000, help="Browser wait timeout in milliseconds")
+    finalize_session.set_defaults(func=cmd_finalize_session)
     return parser
 
 
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
-    validate_transport_args(args, parser)
+    if args.command == "run":
+        validate_transport_args(args, parser)
     try:
         return args.func(args)
     except (ValidationError, TransportError) as exc:

@@ -26,7 +26,6 @@ AgentTypeTest 把题库、分批发题、结果聚合和报告渲染收在同一
 
 - 本地题库：`mbti93-cn`、`mini-ipip-en`
 - 网站适配器：`16personalities`、`sbti-bilibili`、`dtti`
-- transport：`manual`、`subprocess`、`openai-compatible`
 
 ## GPT-5.4 实例
 
@@ -74,6 +73,14 @@ AgentTypeTest 把题库、分批发题、结果聚合和报告渲染收在同一
 - 默认跑完整问卷。
 - 除非对方明确要你验证仓库，否则不要停在安装检查、smoke test 或 adapter 探测。
 - 除非对方明确说要短版/demo，否则不要自己擅自缩题量。
+
+问用户的时候，顺带把这些测试是什么说清楚：
+
+- `mbti93-cn`：本地 93 题中文 MBTI 风格题库
+- `mini-ipip-en`：本地 20 题英文 Big Five 题库
+- `16personalities`：在线 16Personalities 浏览器测试
+- `sbti-bilibili`：在线 B 站 SBTI 浏览器测试
+- `dtti`：在线 DTTI 浏览器测试，结果本地聚合
 
 直接从这里开始：
 

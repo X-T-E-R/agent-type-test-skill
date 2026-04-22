@@ -1,6 +1,6 @@
 ---
 name: agent-type-test
-description: Use when an AI agent needs to be tested with staged MBTI or other xxTI-style questionnaires, especially when the user wants gradual disclosure, blind prompts, local or online question banks, reusable scoring, repeatable runs, or protocol-friendly execution through manual handoff, subprocess bridges, or OpenAI-compatible chat APIs.
+description: Use when an AI agent needs to be tested with staged MBTI or other xxTI-style questionnaires, especially when the user wants gradual disclosure, blind prompts, local or online question banks, reusable scoring, repeatable runs, and visual reports for the tested agent itself.
 ---
 
 # AgentTypeTest
@@ -16,6 +16,7 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
 - Before you run anything, ask the human **which test** they want you to take.
 - Do **not** begin with install audits, smoke tests, sample adapters, or site probes unless the human explicitly asks you to verify the repo itself.
 - Do **not** silently shorten the questionnaire just because “试玩” sounds casual. Full-length is the default.
+- Do **not** invent a transport or API plan when a self-session flow already exists.
 
 ## Workflow
 
@@ -28,6 +29,23 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
   - prefer `prepare-session` + `finalize-session` if you do not already have a bridge that can feed prompts back into your own runtime
 - `maintainer mode`
   - only when the human explicitly asks whether the repo works, asks you to install it, or asks you to debug / verify / develop it
+
+### 0.5 Ask the Human Like This
+
+Before a self-subject run, ask which test they want and briefly explain the choices:
+
+- `mbti93-cn`
+  - local 93-question Chinese MBTI-style bank
+- `mini-ipip-en`
+  - local 20-item English Big Five bank
+- `16personalities`
+  - online 16Personalities browser test
+- `sbti-bilibili`
+  - online Bilibili SBTI browser test
+- `dtti`
+  - online DTTI browser test with local scoring
+
+Keep the question short: ask them to pick one by name.
 
 ### 1. Choose the Test First
 
@@ -55,16 +73,9 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
   - the runner writes batch packets into a session directory
   - you answer each packet as yourself by writing the matching `batch-XX.response.json` files
   - after all responses are written, `finalize-session` scores them and renders the reports
-- `manual`
-  - use this when a human operator is forwarding batches between the runner and another AI
-  - this is not the best default when you are both the operator and the tested agent inside a non-interactive tool environment
-
-- `subprocess`
-  - preferred for CLI agents, local wrappers, or MCP bridge adapters
-  - the external process reads a batch packet from stdin and writes JSON to stdout
-- `openai-compatible`
-  - use this when the user already has a compatible online API
-  - the runner uses standard `/chat/completions`
+- `run` with transport
+  - maintainer-only path for smoke tests, wrappers, and debugging
+  - not the preferred path for a self-subject run
 
 ### 4. Keep the Test Blind and Staged
 
@@ -116,6 +127,21 @@ python scripts/agent_type_test_runner.py finalize-session `
   --session-dir tmp/agent-type-test-session-YYYYMMDD-HHMMSS
 ```
 
+### For Website Tests
+
+Use the website runner's self-session flow instead of trying to build your own bridge:
+
+```powershell
+python scripts/website_test_runner.py prepare-session `
+  --adapter 16personalities `
+  --rounds 1
+```
+
+```powershell
+python scripts/website_test_runner.py finalize-session `
+  --session-dir tmp/website-session-16personalities-YYYYMMDD-HHMMSS
+```
+
 ### What Not To Do In Self-Subject Mode
 
 - Do not stop after installation or smoke tests.
@@ -123,6 +149,7 @@ python scripts/agent_type_test_runner.py finalize-session `
 - Do not treat site probes or adapter verification as the main task.
 - Do not search the repo for answer keys before answering.
 - Do not shorten the test on your own just to make it “quicker”.
+- Do not stop to design a custom transport or API integration for yourself.
 
 ## Maintainer Checks
 
@@ -172,19 +199,6 @@ python scripts/agent_type_test_runner.py run `
   --batch-size 4 `
   --limit-questions 12 `
   --allow-partial-run `
-  --rounds 2
-```
-
-### Run Against an OpenAI-Compatible Endpoint
-
-```powershell
-python scripts/agent_type_test_runner.py run `
-  --bank mbti93-cn `
-  --transport openai-compatible `
-  --base-url "https://api.openai.com/v1" `
-  --model "gpt-4o-mini" `
-  --api-key "$env:OPENAI_API_KEY" `
-  --batch-size 4 `
   --rounds 2
 ```
 
@@ -270,6 +284,7 @@ python scripts/website_test_runner.py run `
 - Ask the human which test they want before starting a self-subject run.
 - In self-subject mode, answer the packets based on your own current tendencies; do not answer as a repo auditor.
 - Full-length is the default. Partial runs require explicit user intent.
+- For website tests, prefer `website_test_runner.py prepare-session/finalize-session` over transport-based runs.
 - Reports should be written as `report.json`, `report.md`, `report.html`, and `report.svg`.
 - When reporting results back to the user, prefer the visual artifacts first: `report.html` and `report.svg`.
 - Website adapter reports should include the original source link and a one-line introduction whenever possible.

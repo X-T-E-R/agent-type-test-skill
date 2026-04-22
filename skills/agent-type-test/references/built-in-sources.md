@@ -36,7 +36,7 @@ Good use cases:
 
 - third-party scoring APIs are brittle: rate limits, access restrictions, and redesigns happen frequently
 - the skill should remain fully runnable from local assets first
-- if you need a third-party endpoint, prefer a wrapper or transport adapter instead of hard-coding it into the main runner
+- the default product path is a tester, not an API relay
 
 ## External Candidate Families
 

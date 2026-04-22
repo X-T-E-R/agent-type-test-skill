@@ -21,7 +21,7 @@ Default method:
 ## Smoke Test vs Full Test
 
 - smoke test
-  - goal: verify that the skill, bank, transport, and reporting pipeline all work
+  - goal: verify that the skill, bank, maintainer bridge, and reporting pipeline all work
   - recommended: `rounds = 1`, `limit_questions = 8`, `batch_size = 4`, and an explicit partial-run opt-in
 - full test
   - goal: inspect aggregate results and stability

@@ -28,7 +28,6 @@ AgentTypeTest keeps the question banks, staged delivery, result aggregation, and
 
 - Local banks: `mbti93-cn`, `mini-ipip-en`
 - Website adapters: `16personalities`, `sbti-bilibili`, `dtti`
-- Transports: `manual`, `subprocess`, `openai-compatible`
 
 ## Example Outputs
 
@@ -76,6 +75,14 @@ If a human gives you this repo and says “try it” or “play with it”, the 
 - Use the full questionnaire by default.
 - Do not stop at installation checks or smoke tests unless the human explicitly asked you to verify the repo.
 - Do not silently shorten the run unless the human explicitly asks for a shorter demo.
+
+When you ask, include a short explanation:
+
+- `mbti93-cn` — local 93-question Chinese MBTI-style bank
+- `mini-ipip-en` — local 20-item English Big Five bank
+- `16personalities` — online 16Personalities browser test
+- `sbti-bilibili` — online Bilibili SBTI browser test
+- `dtti` — online Dostoevsky-themed browser test with local scoring
 
 Start here:
 
