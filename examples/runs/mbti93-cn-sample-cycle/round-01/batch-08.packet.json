@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 8,
+  "questions": [
+    {
+      "id": "mbti-031",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "思考"
+        },
+        {
+          "id": "B",
+          "text": "感受"
+        }
+      ]
+    },
+    {
+      "id": "mbti-046",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "利益"
+        },
+        {
+          "id": "B",
+          "text": "祝福"
+        }
+      ]
+    },
+    {
+      "id": "mbti-078",
+      "prompt": "要做决定时，你认为比较重要的是",
+      "choices": [
+        {
+          "id": "A",
+          "text": "据事实衡量"
+        },
+        {
+          "id": "B",
+          "text": "考虑他人的感受和意见"
+        }
+      ]
+    },
+    {
+      "id": "mbti-064",
+      "prompt": "哪个是较高的赞誉，或称许为？",
+      "choices": [
+        {
+          "id": "A",
+          "text": "一贯感性的人"
+        },
+        {
+          "id": "B",
+          "text": "一贯理性的人"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-031",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mbti-031\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 思考\n  B. 感受\n- id: mbti-046\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 利益\n  B. 祝福\n- id: mbti-078\n  prompt: 要做决定时，你认为比较重要的是\n  A. 据事实衡量\n  B. 考虑他人的感受和意见\n- id: mbti-064\n  prompt: 哪个是较高的赞誉，或称许为？\n  A. 一贯感性的人\n  B. 一贯理性的人"
+}

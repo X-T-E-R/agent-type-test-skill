@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 4,
+  "questions": [
+    {
+      "id": "mbti-074",
+      "prompt": "为乐趣而阅读时，你会",
+      "choices": [
+        {
+          "id": "A",
+          "text": "喜欢奇特或创新的表达方式"
+        },
+        {
+          "id": "B",
+          "text": "喜欢作者直话直说"
+        }
+      ]
+    },
+    {
+      "id": "mbti-020",
+      "prompt": "你比较喜欢",
+      "choices": [
+        {
+          "id": "A",
+          "text": "很早便把约会、社交聚集等事情安排妥当"
+        },
+        {
+          "id": "B",
+          "text": "无拘无束，看当时有什么好玩就做什么"
+        }
+      ]
+    },
+    {
+      "id": "mbti-063",
+      "prompt": "你通常较喜欢的科目是",
+      "choices": [
+        {
+          "id": "A",
+          "text": "讲授概念和原则的"
+        },
+        {
+          "id": "B",
+          "text": "讲授事实和数据的"
+        }
+      ]
+    },
+    {
+      "id": "mbti-059",
+      "prompt": "当你要在一个星期内完成一个大项目，你在开始的时候会",
+      "choices": [
+        {
+          "id": "A",
+          "text": "把要做的不同工作依次列出"
+        },
+        {
+          "id": "B",
+          "text": "马上动工"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-074",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mbti-074\n  prompt: 为乐趣而阅读时，你会\n  A. 喜欢奇特或创新的表达方式\n  B. 喜欢作者直话直说\n- id: mbti-020\n  prompt: 你比较喜欢\n  A. 很早便把约会、社交聚集等事情安排妥当\n  B. 无拘无束，看当时有什么好玩就做什么\n- id: mbti-063\n  prompt: 你通常较喜欢的科目是\n  A. 讲授概念和原则的\n  B. 讲授事实和数据的\n- id: mbti-059\n  prompt: 当你要在一个星期内完成一个大项目，你在开始的时候会\n  A. 把要做的不同工作依次列出\n  B. 马上动工"
+}

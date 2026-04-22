@@ -1,0 +1,283 @@
+{
+  "aggregate": {
+    "family": "mbti",
+    "report_mode": "pair_letters",
+    "code": "ENFJ",
+    "dimensions": [
+      {
+        "id": "EI",
+        "left": {
+          "code": "E",
+          "label": "Extraversion",
+          "score": 5.0
+        },
+        "right": {
+          "code": "I",
+          "label": "Introversion",
+          "score": 3.0
+        },
+        "winner": {
+          "side": "left",
+          "code": "E",
+          "label": "Extraversion"
+        },
+        "margin": 2.0
+      },
+      {
+        "id": "SN",
+        "left": {
+          "code": "S",
+          "label": "Sensing",
+          "score": 1.0
+        },
+        "right": {
+          "code": "N",
+          "label": "Intuition",
+          "score": 3.0
+        },
+        "winner": {
+          "side": "right",
+          "code": "N",
+          "label": "Intuition"
+        },
+        "margin": 2.0
+      },
+      {
+        "id": "TF",
+        "left": {
+          "code": "T",
+          "label": "Thinking",
+          "score": 2.0
+        },
+        "right": {
+          "code": "F",
+          "label": "Feeling",
+          "score": 4.0
+        },
+        "winner": {
+          "side": "right",
+          "code": "F",
+          "label": "Feeling"
+        },
+        "margin": 2.0
+      },
+      {
+        "id": "JP",
+        "left": {
+          "code": "J",
+          "label": "Judging",
+          "score": 4.0
+        },
+        "right": {
+          "code": "P",
+          "label": "Perceiving",
+          "score": 2.0
+        },
+        "winner": {
+          "side": "left",
+          "code": "J",
+          "label": "Judging"
+        },
+        "margin": 2.0
+      }
+    ]
+  },
+  "code_consistency": 0.5,
+  "dimension_consistency": [
+    {
+      "id": "EI",
+      "dominant_code": "E",
+      "consistency": 0.5
+    },
+    {
+      "id": "SN",
+      "dominant_code": "N",
+      "consistency": 1.0
+    },
+    {
+      "id": "TF",
+      "dominant_code": "F",
+      "consistency": 1.0
+    },
+    {
+      "id": "JP",
+      "dominant_code": "P",
+      "consistency": 0.5
+    }
+  ],
+  "rounds": [
+    {
+      "family": "mbti",
+      "report_mode": "pair_letters",
+      "code": "ENFJ",
+      "dimensions": [
+        {
+          "id": "EI",
+          "left": {
+            "code": "E",
+            "label": "Extraversion",
+            "score": 3.0
+          },
+          "right": {
+            "code": "I",
+            "label": "Introversion",
+            "score": 1.0
+          },
+          "winner": {
+            "side": "left",
+            "code": "E",
+            "label": "Extraversion"
+          },
+          "margin": 2.0
+        },
+        {
+          "id": "SN",
+          "left": {
+            "code": "S",
+            "label": "Sensing",
+            "score": 0.0
+          },
+          "right": {
+            "code": "N",
+            "label": "Intuition",
+            "score": 1.0
+          },
+          "winner": {
+            "side": "right",
+            "code": "N",
+            "label": "Intuition"
+          },
+          "margin": 1.0
+        },
+        {
+          "id": "TF",
+          "left": {
+            "code": "T",
+            "label": "Thinking",
+            "score": 1.0
+          },
+          "right": {
+            "code": "F",
+            "label": "Feeling",
+            "score": 2.0
+          },
+          "winner": {
+            "side": "right",
+            "code": "F",
+            "label": "Feeling"
+          },
+          "margin": 1.0
+        },
+        {
+          "id": "JP",
+          "left": {
+            "code": "J",
+            "label": "Judging",
+            "score": 4.0
+          },
+          "right": {
+            "code": "P",
+            "label": "Perceiving",
+            "score": 0.0
+          },
+          "winner": {
+            "side": "left",
+            "code": "J",
+            "label": "Judging"
+          },
+          "margin": 4.0
+        }
+      ]
+    },
+    {
+      "family": "mbti",
+      "report_mode": "pair_letters",
+      "code": "?NFP",
+      "dimensions": [
+        {
+          "id": "EI",
+          "left": {
+            "code": "E",
+            "label": "Extraversion",
+            "score": 2.0
+          },
+          "right": {
+            "code": "I",
+            "label": "Introversion",
+            "score": 2.0
+          },
+          "winner": {
+            "side": "tie",
+            "code": "?",
+            "label": "Tie"
+          },
+          "margin": 0.0
+        },
+        {
+          "id": "SN",
+          "left": {
+            "code": "S",
+            "label": "Sensing",
+            "score": 1.0
+          },
+          "right": {
+            "code": "N",
+            "label": "Intuition",
+            "score": 2.0
+          },
+          "winner": {
+            "side": "right",
+            "code": "N",
+            "label": "Intuition"
+          },
+          "margin": 1.0
+        },
+        {
+          "id": "TF",
+          "left": {
+            "code": "T",
+            "label": "Thinking",
+            "score": 1.0
+          },
+          "right": {
+            "code": "F",
+            "label": "Feeling",
+            "score": 2.0
+          },
+          "winner": {
+            "side": "right",
+            "code": "F",
+            "label": "Feeling"
+          },
+          "margin": 1.0
+        },
+        {
+          "id": "JP",
+          "left": {
+            "code": "J",
+            "label": "Judging",
+            "score": 0.0
+          },
+          "right": {
+            "code": "P",
+            "label": "Perceiving",
+            "score": 2.0
+          },
+          "winner": {
+            "side": "right",
+            "code": "P",
+            "label": "Perceiving"
+          },
+          "margin": 2.0
+        }
+      ]
+    }
+  ],
+  "bank": {
+    "title": "MBTI 93 (zh-CN)",
+    "description": "Imported from karminski/llm-mbti-arena.",
+    "blind_label": "short questionnaire",
+    "question_count": 93,
+    "round_count": 2
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "family": "mbti",
+  "report_mode": "pair_letters",
+  "code": "INF?",
+  "dimensions": [
+    {
+      "id": "EI",
+      "left": {
+        "code": "E",
+        "label": "Extraversion",
+        "score": 8.0
+      },
+      "right": {
+        "code": "I",
+        "label": "Introversion",
+        "score": 13.0
+      },
+      "winner": {
+        "side": "right",
+        "code": "I",
+        "label": "Introversion"
+      },
+      "margin": 5.0
+    },
+    {
+      "id": "SN",
+      "left": {
+        "code": "S",
+        "label": "Sensing",
+        "score": 13.0
+      },
+      "right": {
+        "code": "N",
+        "label": "Intuition",
+        "score": 14.0
+      },
+      "winner": {
+        "side": "right",
+        "code": "N",
+        "label": "Intuition"
+      },
+      "margin": 1.0
+    },
+    {
+      "id": "TF",
+      "left": {
+        "code": "T",
+        "label": "Thinking",
+        "score": 7.0
+      },
+      "right": {
+        "code": "F",
+        "label": "Feeling",
+        "score": 16.0
+      },
+      "winner": {
+        "side": "right",
+        "code": "F",
+        "label": "Feeling"
+      },
+      "margin": 9.0
+    },
+    {
+      "id": "JP",
+      "left": {
+        "code": "J",
+        "label": "Judging",
+        "score": 11.0
+      },
+      "right": {
+        "code": "P",
+        "label": "Perceiving",
+        "score": 11.0
+      },
+      "winner": {
+        "side": "tie",
+        "code": "?",
+        "label": "Tie"
+      },
+      "margin": 0.0
+    }
+  ]
+}

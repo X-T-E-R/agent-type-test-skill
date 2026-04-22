@@ -1,0 +1,126 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 5,
+  "questions": [
+    {
+      "id": "dtti-031",
+      "prompt": "我有时会故意做出极端任性或残忍的事情，只是为了看看秩序崩溃时周围人错愕的表情，这让我感到自己活着。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-024",
+      "prompt": "所谓的“理智和秩序”，不过是我们在无意识的、昆虫般的狂野欲望面前，用来欺骗自己的那一层薄薄的遮羞布。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-012",
+      "prompt": "我不相信任何神圣的恩典。如果我还愿意向那些散发着恶臭的灵魂伸出手，仅仅是因为这种激进的姿态，是我唯一能用来对抗现实荒谬的武器。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-027",
+      "prompt": "世界对我而言是一个巨大的、令人厌倦的垃圾场，所有的政治蓝图和宗教救赎在这个废墟里都显得像个笑话。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "dtti-031",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: dtti-031\n  prompt: 我有时会故意做出极端任性或残忍的事情，只是为了看看秩序崩溃时周围人错愕的表情，这让我感到自己活着。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-024\n  prompt: 所谓的“理智和秩序”，不过是我们在无意识的、昆虫般的狂野欲望面前，用来欺骗自己的那一层薄薄的遮羞布。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-012\n  prompt: 我不相信任何神圣的恩典。如果我还愿意向那些散发着恶臭的灵魂伸出手，仅仅是因为这种激进的姿态，是我唯一能用来对抗现实荒谬的武器。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-027\n  prompt: 世界对我而言是一个巨大的、令人厌倦的垃圾场，所有的政治蓝图和宗教救赎在这个废墟里都显得像个笑话。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意"
+}

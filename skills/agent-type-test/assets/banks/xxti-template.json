@@ -1,0 +1,94 @@
+{
+  "family": "replace-me",
+  "version": "2026-04-22",
+  "title": "Replace Me",
+  "description": "Template bank for custom xxTI-style tests.",
+  "blind_label": "short questionnaire",
+  "report_mode": "pair_letters",
+  "dimension_order": [
+    "AB",
+    "CD"
+  ],
+  "dimensions": [
+    {
+      "id": "AB",
+      "left": {
+        "code": "A",
+        "label": "Alpha"
+      },
+      "right": {
+        "code": "B",
+        "label": "Beta"
+      }
+    },
+    {
+      "id": "CD",
+      "left": {
+        "code": "C",
+        "label": "Calm"
+      },
+      "right": {
+        "code": "D",
+        "label": "Dynamic"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "template-001",
+      "prompt": "遇到新任务时，你更倾向于",
+      "choices": [
+        {
+          "id": "A",
+          "text": "先搭好结构再动手",
+          "effects": [
+            {
+              "dimension": "AB",
+              "side": "left",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "B",
+          "text": "先试两下再说",
+          "effects": [
+            {
+              "dimension": "AB",
+              "side": "right",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "template-002",
+      "prompt": "当环境变化时，你更像",
+      "choices": [
+        {
+          "id": "A",
+          "text": "稳住节奏，慢慢调整",
+          "effects": [
+            {
+              "dimension": "CD",
+              "side": "left",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "B",
+          "text": "快速切换，直接跟上",
+          "effects": [
+            {
+              "dimension": "CD",
+              "side": "right",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

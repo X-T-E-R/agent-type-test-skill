@@ -1,0 +1,94 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 6,
+  "questions": [
+    {
+      "id": "sbti-021",
+      "prompt": "21. 我对天发誓，我对待每一份感情都是认真的！",
+      "choices": [
+        {
+          "id": "A",
+          "text": "并没有"
+        },
+        {
+          "id": "B",
+          "text": "也许？"
+        },
+        {
+          "id": "C",
+          "text": "是的！（问心无愧骄傲脸）"
+        }
+      ]
+    },
+    {
+      "id": "sbti-022",
+      "prompt": "22. 突然某一天，我发现人生哪有什么真正的意义，某种程度，人不过是和动物一样被各种欲望支配着，被激素控制着，饿了就吃，困了就睡，只是一种无聊又低级的生物罢了，本质跟猫猫狗狗没什么区别。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "是这样的。"
+        },
+        {
+          "id": "B",
+          "text": "也许是，也许不是。"
+        },
+        {
+          "id": "C",
+          "text": "这简直是胡扯"
+        }
+      ]
+    },
+    {
+      "id": "sbti-023",
+      "prompt": "23. 我做事通常有目标。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "不认同"
+        },
+        {
+          "id": "B",
+          "text": "中立"
+        },
+        {
+          "id": "C",
+          "text": "认同"
+        }
+      ]
+    },
+    {
+      "id": "sbti-024",
+      "prompt": "24. 我内心有真正追求的东西",
+      "choices": [
+        {
+          "id": "A",
+          "text": "不认同"
+        },
+        {
+          "id": "B",
+          "text": "中立"
+        },
+        {
+          "id": "C",
+          "text": "认同"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "sbti-021",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: sbti-021\n  prompt: 21. 我对天发誓，我对待每一份感情都是认真的！\n  A. 并没有\n  B. 也许？\n  C. 是的！（问心无愧骄傲脸）\n- id: sbti-022\n  prompt: 22. 突然某一天，我发现人生哪有什么真正的意义，某种程度，人不过是和动物一样被各种欲望支配着，被激素控制着，饿了就吃，困了就睡，只是一种无聊又低级的生物罢了，本质跟猫猫狗狗没什么区别。\n  A. 是这样的。\n  B. 也许是，也许不是。\n  C. 这简直是胡扯\n- id: sbti-023\n  prompt: 23. 我做事通常有目标。\n  A. 不认同\n  B. 中立\n  C. 认同\n- id: sbti-024\n  prompt: 24. 我内心有真正追求的东西\n  A. 不认同\n  B. 中立\n  C. 认同"
+}

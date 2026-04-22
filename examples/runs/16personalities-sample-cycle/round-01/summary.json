@@ -1,0 +1,34 @@
+{
+  "type_code": "ENFP-T",
+  "type_name": "Campaigner",
+  "profile_url": "https://www.16personalities.com/profiles/enfp-t/x/61ak1c4hc",
+  "dimensions": [
+    {
+      "name": "Energy",
+      "percent": 59,
+      "winner": "Extraverted"
+    },
+    {
+      "name": "Mind",
+      "percent": 64,
+      "winner": "Intuitive"
+    },
+    {
+      "name": "Nature",
+      "percent": 52,
+      "winner": "Feeling"
+    },
+    {
+      "name": "Tactics",
+      "percent": 51,
+      "winner": "Prospecting"
+    },
+    {
+      "name": "Identity",
+      "percent": 54,
+      "winner": "Turbulent"
+    }
+  ],
+  "asked_questions": 60,
+  "auto_filled_questions": 0
+}

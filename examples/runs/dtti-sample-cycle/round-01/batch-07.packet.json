@@ -1,0 +1,126 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 7,
+  "questions": [
+    {
+      "id": "dtti-025",
+      "prompt": "我对社交场合中的利益交换和隐晦暗示感到极度迟钝，甚至从根本上觉得那些东西令人作呕。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-013",
+      "prompt": "对我来说，去爱抽象意义上的“全人类”很容易，但去爱一个具体的、打着饱嗝、散发着汗臭味的人却令人极度作呕。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-003",
+      "prompt": "同情心不过是弱者的货币。但在看透他人灵魂中那股不可救药的劣根性后，我选择接纳他们——这是一种属于幸存者的傲慢，也是对虚无的最终嘲弄。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-014",
+      "prompt": "我的直率和坦诚常常让周围的人感到极度尴尬，甚至在无意中引发灾难，但我依然像个白痴一样拒绝学会伪装。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "dtti-025",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: dtti-025\n  prompt: 我对社交场合中的利益交换和隐晦暗示感到极度迟钝，甚至从根本上觉得那些东西令人作呕。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-013\n  prompt: 对我来说，去爱抽象意义上的“全人类”很容易，但去爱一个具体的、打着饱嗝、散发着汗臭味的人却令人极度作呕。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-003\n  prompt: 同情心不过是弱者的货币。但在看透他人灵魂中那股不可救药的劣根性后，我选择接纳他们——这是一种属于幸存者的傲慢，也是对虚无的最终嘲弄。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-014\n  prompt: 我的直率和坦诚常常让周围的人感到极度尴尬，甚至在无意中引发灾难，但我依然像个白痴一样拒绝学会伪装。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意"
+}

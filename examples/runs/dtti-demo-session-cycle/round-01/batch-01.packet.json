@@ -1,0 +1,126 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 1,
+  "questions": [
+    {
+      "id": "dtti-008",
+      "prompt": "世界上极少数的“非凡之人”，为了推动历史的车轮，拥有绝对的权利去跨越世俗道德，甚至去踩碎那些平庸的头骨。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-001",
+      "prompt": "即使知道会走向毁灭，我也无法抗拒对感官享乐（如酒精、肉欲或狂乱）的极致追求。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-010",
+      "prompt": "我时常感到一种难以名状的癫狂冲动，想要当众撕裂自己的尊严，或向陌生人袒露最肮脏、最卑劣的秘密以求获得刺激。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-024",
+      "prompt": "所谓的“理智和秩序”，不过是我们在无意识的、昆虫般的狂野欲望面前，用来欺骗自己的那一层薄薄的遮羞布。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "dtti-008",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\n\n- id: dtti-008\n  prompt: 世界上极少数的“非凡之人”，为了推动历史的车轮，拥有绝对的权利去跨越世俗道德，甚至去踩碎那些平庸的头骨。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-001\n  prompt: 即使知道会走向毁灭，我也无法抗拒对感官享乐（如酒精、肉欲或狂乱）的极致追求。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-010\n  prompt: 我时常感到一种难以名状的癫狂冲动，想要当众撕裂自己的尊严，或向陌生人袒露最肮脏、最卑劣的秘密以求获得刺激。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-024\n  prompt: 所谓的“理智和秩序”，不过是我们在无意识的、昆虫般的狂野欲望面前，用来欺骗自己的那一层薄薄的遮羞布。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意"
+}

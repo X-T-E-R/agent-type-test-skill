@@ -1,0 +1,24 @@
+{
+  "answers": [
+    {
+      "id": "16p-001",
+      "choice": "A"
+    },
+    {
+      "id": "16p-002",
+      "choice": "B"
+    },
+    {
+      "id": "16p-003",
+      "choice": "C"
+    },
+    {
+      "id": "16p-004",
+      "choice": "D"
+    }
+  ],
+  "meta": {
+    "adapter": "sample_target_adapter",
+    "mode": "cycle"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "answers": [
+    {
+      "id": "sbti-025",
+      "choice": "A"
+    },
+    {
+      "id": "sbti-026",
+      "choice": "B"
+    },
+    {
+      "id": "sbti-027",
+      "choice": "C"
+    },
+    {
+      "id": "sbti-028",
+      "choice": "A"
+    }
+  ],
+  "meta": {
+    "adapter": "sample_target_adapter",
+    "mode": "cycle"
+  }
+}

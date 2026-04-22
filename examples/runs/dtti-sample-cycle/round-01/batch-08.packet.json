@@ -1,0 +1,126 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 8,
+  "questions": [
+    {
+      "id": "dtti-022",
+      "prompt": "当面对伪善的权威时，我更愿意用冰冷的沉默、神经质的冷笑或荒唐离奇的行为来回应，而不是与他们进行任何逻辑辩论。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-030",
+      "prompt": "我不愿轻易释怀那些加诸于我的剥削。只有保持着这种居高临下的敌意，我才能在结构上永远统治那些试图同情我的人。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-007",
+      "prompt": "所谓的高尚往往是掩饰无能的遮羞布。通过彻底的自我贬低和承受痛苦，我实际上是在这虚伪的道德体系中，隐秘地攫取了居高临下的权力。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-015",
+      "prompt": "我宁愿在无序的狂欢中将肝脏烧毁，也不愿在精打细算的资产阶级体面中平庸、安全地老去。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "dtti-022",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: dtti-022\n  prompt: 当面对伪善的权威时，我更愿意用冰冷的沉默、神经质的冷笑或荒唐离奇的行为来回应，而不是与他们进行任何逻辑辩论。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-030\n  prompt: 我不愿轻易释怀那些加诸于我的剥削。只有保持着这种居高临下的敌意，我才能在结构上永远统治那些试图同情我的人。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-007\n  prompt: 所谓的高尚往往是掩饰无能的遮羞布。通过彻底的自我贬低和承受痛苦，我实际上是在这虚伪的道德体系中，隐秘地攫取了居高临下的权力。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-015\n  prompt: 我宁愿在无序的狂欢中将肝脏烧毁，也不愿在精打细算的资产阶级体面中平庸、安全地老去。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意"
+}

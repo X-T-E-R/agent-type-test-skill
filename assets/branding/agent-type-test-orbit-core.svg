@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">AgentTypeTest Orbit Core Logo</title>
+  <desc id="desc">Orbit Core mark for AgentTypeTest with a measured orbit and glowing core.</desc>
+  <defs>
+    <linearGradient id="orbitStroke" x1="96" y1="96" x2="416" y2="416" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#68F0C1"/>
+      <stop offset="1" stop-color="#6BA8FF"/>
+    </linearGradient>
+    <radialGradient id="coreFill" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(306 210) rotate(132.138) scale(176.213)">
+      <stop stop-color="#B7FFF1"/>
+      <stop offset="0.56" stop-color="#68F0C1"/>
+      <stop offset="1" stop-color="#6BA8FF"/>
+    </radialGradient>
+    <filter id="glow" x="160" y="112" width="224" height="224" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="22" result="effect1_foregroundBlur_1_2"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="#0F172A"/>
+  <path d="M363.22 112.65C316.37 86.96 253.12 83.38 201.17 104.7C111.7 141.42 68.94 243.7 105.66 333.17C142.38 422.64 244.66 465.4 334.13 428.68C398.21 402.39 438.37 341.33 440.38 275.77" stroke="url(#orbitStroke)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M376 99L420 129.5L372 153" stroke="url(#orbitStroke)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="256" cy="256" r="90" fill="#08101F" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+  <g filter="url(#glow)">
+    <circle cx="268" cy="224" r="56" fill="url(#coreFill)"/>
+  </g>
+  <circle cx="268" cy="224" r="50" fill="url(#coreFill)"/>
+  <path d="M210 290C226.667 272 242.667 263 258 263C273.333 263 288.667 272 304 290" stroke="#F8FAFC" stroke-opacity="0.92" stroke-width="15" stroke-linecap="round"/>
+  <circle cx="404" cy="202" r="18" fill="#68F0C1"/>
+</svg>

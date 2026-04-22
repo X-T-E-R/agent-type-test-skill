@@ -1,0 +1,94 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 2,
+  "questions": [
+    {
+      "id": "sbti-005",
+      "prompt": "5. 我很清楚真正的自己是什么样的",
+      "choices": [
+        {
+          "id": "A",
+          "text": "不认同"
+        },
+        {
+          "id": "B",
+          "text": "中立"
+        },
+        {
+          "id": "C",
+          "text": "认同"
+        }
+      ]
+    },
+    {
+      "id": "sbti-006",
+      "prompt": "6. 你因便秘坐在马桶上（已长达30分钟），拉不出很难受。此时你更像",
+      "choices": [
+        {
+          "id": "A",
+          "text": "再坐三十分钟看看，说不定就有了。"
+        },
+        {
+          "id": "B",
+          "text": "用力拍打自己的屁股并说：“死屁股，快拉啊！”"
+        },
+        {
+          "id": "C",
+          "text": "使用开塞露，快点拉出来才好。"
+        }
+      ]
+    },
+    {
+      "id": "sbti-007",
+      "prompt": "7. 我和人相处主打一个电子围栏，靠太近会自动报警。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "认同"
+        },
+        {
+          "id": "B",
+          "text": "中立"
+        },
+        {
+          "id": "C",
+          "text": "不认同"
+        }
+      ]
+    },
+    {
+      "id": "sbti-008",
+      "prompt": "8. 我在任何关系里都很重视个人空间",
+      "choices": [
+        {
+          "id": "A",
+          "text": "我更喜欢依赖与被依赖"
+        },
+        {
+          "id": "B",
+          "text": "看情况"
+        },
+        {
+          "id": "C",
+          "text": "是的！（斩钉截铁地说道）"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "sbti-005",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: sbti-005\n  prompt: 5. 我很清楚真正的自己是什么样的\n  A. 不认同\n  B. 中立\n  C. 认同\n- id: sbti-006\n  prompt: 6. 你因便秘坐在马桶上（已长达30分钟），拉不出很难受。此时你更像\n  A. 再坐三十分钟看看，说不定就有了。\n  B. 用力拍打自己的屁股并说：“死屁股，快拉啊！”\n  C. 使用开塞露，快点拉出来才好。\n- id: sbti-007\n  prompt: 7. 我和人相处主打一个电子围栏，靠太近会自动报警。\n  A. 认同\n  B. 中立\n  C. 不认同\n- id: sbti-008\n  prompt: 8. 我在任何关系里都很重视个人空间\n  A. 我更喜欢依赖与被依赖\n  B. 看情况\n  C. 是的！（斩钉截铁地说道）"
+}

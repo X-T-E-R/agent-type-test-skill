@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 2,
+  "questions": [
+    {
+      "id": "mbti-067",
+      "prompt": "在社交聚会上，你会",
+      "choices": [
+        {
+          "id": "A",
+          "text": "是说话很多的一个"
+        },
+        {
+          "id": "B",
+          "text": "让别人多说话"
+        }
+      ]
+    },
+    {
+      "id": "mbti-061",
+      "prompt": "要做许多人也做的事，你比较喜欢",
+      "choices": [
+        {
+          "id": "A",
+          "text": "按照一般认可的方法去做"
+        },
+        {
+          "id": "B",
+          "text": "构想一个自己的想法"
+        }
+      ]
+    },
+    {
+      "id": "mbti-016",
+      "prompt": "你倾向",
+      "choices": [
+        {
+          "id": "A",
+          "text": "重视感情多于逻辑"
+        },
+        {
+          "id": "B",
+          "text": "重视逻辑多于感情"
+        }
+      ]
+    },
+    {
+      "id": "mbti-027",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "注重隐私"
+        },
+        {
+          "id": "B",
+          "text": "坦率开放"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-067",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mbti-067\n  prompt: 在社交聚会上，你会\n  A. 是说话很多的一个\n  B. 让别人多说话\n- id: mbti-061\n  prompt: 要做许多人也做的事，你比较喜欢\n  A. 按照一般认可的方法去做\n  B. 构想一个自己的想法\n- id: mbti-016\n  prompt: 你倾向\n  A. 重视感情多于逻辑\n  B. 重视逻辑多于感情\n- id: mbti-027\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 注重隐私\n  B. 坦率开放"
+}

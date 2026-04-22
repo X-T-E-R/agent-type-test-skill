@@ -1,0 +1,158 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 9,
+  "questions": [
+    {
+      "id": "16p-025",
+      "prompt": "In disagreements, you prioritize proving your point over preserving the feelings of others.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-026",
+      "prompt": "You usually wait for others to introduce themselves first at social gatherings.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-027",
+      "prompt": "Your mood can change very quickly.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-028",
+      "prompt": "You are not easily swayed by emotional arguments.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "16p-025",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: 16p-025\n  prompt: In disagreements, you prioritize proving your point over preserving the feelings of others.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-026\n  prompt: You usually wait for others to introduce themselves first at social gatherings.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-027\n  prompt: Your mood can change very quickly.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-028\n  prompt: You are not easily swayed by emotional arguments.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree"
+}

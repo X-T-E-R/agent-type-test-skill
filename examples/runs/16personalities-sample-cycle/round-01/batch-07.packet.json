@@ -1,0 +1,158 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 7,
+  "questions": [
+    {
+      "id": "16p-019",
+      "prompt": "You actively seek out new experiences and knowledge areas to explore.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-020",
+      "prompt": "You are prone to worrying that things will take a turn for the worse.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-021",
+      "prompt": "You enjoy solitary hobbies or activities more than group ones.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-022",
+      "prompt": "You cannot imagine yourself writing fictional stories for a living.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "16p-019",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: 16p-019\n  prompt: You actively seek out new experiences and knowledge areas to explore.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-020\n  prompt: You are prone to worrying that things will take a turn for the worse.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-021\n  prompt: You enjoy solitary hobbies or activities more than group ones.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-022\n  prompt: You cannot imagine yourself writing fictional stories for a living.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree"
+}

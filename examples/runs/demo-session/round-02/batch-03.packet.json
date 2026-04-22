@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 2,
+  "batch_index": 3,
+  "questions": [
+    {
+      "id": "mbti-035",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "文静"
+        },
+        {
+          "id": "B",
+          "text": "外向"
+        }
+      ]
+    },
+    {
+      "id": "mbti-073",
+      "prompt": "你会",
+      "choices": [
+        {
+          "id": "A",
+          "text": "跟随一些证明有效的方法"
+        },
+        {
+          "id": "B",
+          "text": "几乎跟任何人都可以"
+        }
+      ]
+    },
+    {
+      "id": "mbti-076",
+      "prompt": "你做事多数是",
+      "choices": [
+        {
+          "id": "A",
+          "text": "按当天心情去做"
+        },
+        {
+          "id": "B",
+          "text": "照拟好的程序表去做"
+        }
+      ]
+    },
+    {
+      "id": "mbti-072",
+      "prompt": "你能否滔滔不绝地与人聊天",
+      "choices": [
+        {
+          "id": "A",
+          "text": "只限于跟你有共同兴趣的人"
+        },
+        {
+          "id": "B",
+          "text": "几乎跟任何人都可以"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-035",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\n\n- id: mbti-035\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 文静\n  B. 外向\n- id: mbti-073\n  prompt: 你会\n  A. 跟随一些证明有效的方法\n  B. 几乎跟任何人都可以\n- id: mbti-076\n  prompt: 你做事多数是\n  A. 按当天心情去做\n  B. 照拟好的程序表去做\n- id: mbti-072\n  prompt: 你能否滔滔不绝地与人聊天\n  A. 只限于跟你有共同兴趣的人\n  B. 几乎跟任何人都可以"
+}

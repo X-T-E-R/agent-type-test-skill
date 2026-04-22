@@ -1,0 +1,152 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 3,
+  "questions": [
+    {
+      "id": "mini-ipip-018",
+      "prompt": "Have difficulty understanding abstract ideas.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-011",
+      "prompt": "Often forget to put things back in their proper place.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-002",
+      "prompt": "Talk to a lot of different people at parties.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-012",
+      "prompt": "Make a mess of things.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-003",
+      "prompt": "Don't talk a lot.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mini-ipip-018",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mini-ipip-018\n  prompt: Have difficulty understanding abstract ideas.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-011\n  prompt: Often forget to put things back in their proper place.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-002\n  prompt: Talk to a lot of different people at parties.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-012\n  prompt: Make a mess of things.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-003\n  prompt: Don't talk a lot.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree"
+}

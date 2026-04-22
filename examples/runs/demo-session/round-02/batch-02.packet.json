@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 2,
+  "batch_index": 2,
+  "questions": [
+    {
+      "id": "mbti-067",
+      "prompt": "在社交聚会上，你会",
+      "choices": [
+        {
+          "id": "A",
+          "text": "是说话很多的一个"
+        },
+        {
+          "id": "B",
+          "text": "让别人多说话"
+        }
+      ]
+    },
+    {
+      "id": "mbti-015",
+      "prompt": "你会跟哪些人做朋友？",
+      "choices": [
+        {
+          "id": "A",
+          "text": "常提出新主意的"
+        },
+        {
+          "id": "B",
+          "text": "脚踏实地的"
+        }
+      ]
+    },
+    {
+      "id": "mbti-027",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "注重隐私"
+        },
+        {
+          "id": "B",
+          "text": "坦率开放"
+        }
+      ]
+    },
+    {
+      "id": "mbti-031",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "思考"
+        },
+        {
+          "id": "B",
+          "text": "感受"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-067",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\n\n- id: mbti-067\n  prompt: 在社交聚会上，你会\n  A. 是说话很多的一个\n  B. 让别人多说话\n- id: mbti-015\n  prompt: 你会跟哪些人做朋友？\n  A. 常提出新主意的\n  B. 脚踏实地的\n- id: mbti-027\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 注重隐私\n  B. 坦率开放\n- id: mbti-031\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 思考\n  B. 感受"
+}

@@ -1,0 +1,90 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 20,
+  "questions": [
+    {
+      "id": "16p-059",
+      "prompt": "You struggle with deadlines.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-060",
+      "prompt": "You feel confident that things will work out for you.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "16p-059",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: 16p-059\n  prompt: You struggle with deadlines.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-060\n  prompt: You feel confident that things will work out for you.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree"
+}

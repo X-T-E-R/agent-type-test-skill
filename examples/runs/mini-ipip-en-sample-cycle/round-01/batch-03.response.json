@@ -1,0 +1,24 @@
+{
+  "answers": [
+    {
+      "id": "mini-ipip-007",
+      "choice": "A"
+    },
+    {
+      "id": "mini-ipip-013",
+      "choice": "B"
+    },
+    {
+      "id": "mini-ipip-018",
+      "choice": "C"
+    },
+    {
+      "id": "mini-ipip-011",
+      "choice": "D"
+    }
+  ],
+  "meta": {
+    "adapter": "sample_target_adapter",
+    "mode": "cycle"
+  }
+}

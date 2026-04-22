@@ -1,0 +1,5 @@
+interface:
+  display_name: "AgentTypeTest"
+  short_description: "Blind staged xxTI and trait-style tests for AI agents"
+  default_prompt: "Use $agent-type-test to run a staged MBTI-style test against an AI agent without exposing the whole bank."
+

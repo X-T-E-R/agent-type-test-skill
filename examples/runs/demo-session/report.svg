@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+<rect width="1280" height="760" fill="#f4eee3"/>
+<rect x="44" y="38" width="1192" height="684" rx="30" fill="#fffaf1" stroke="rgba(96,75,42,0.16)"/>
+<text x="84" y="110" font-family="Palatino Linotype, serif" font-size="22" fill="#6c645c">Aggregate Code</text>
+<text x="84" y="206" font-family="Palatino Linotype, serif" font-size="108" fill="#8a4b2d">ENFJ</text>
+<text x="84" y="252" font-family="Palatino Linotype, serif" font-size="30" fill="#1a1613">MBTI 93 (zh-CN)</text>
+<text x="84" y="300" font-family="Palatino Linotype, serif" font-size="24" fill="#6c645c">Code Consistency: 0.50</text>
+<text x="84" y="388" font-family="Palatino Linotype, serif" font-size="28" fill="#1a1613">EI</text>
+<text x="150" y="388" font-family="Palatino Linotype, serif" font-size="18" fill="#6c645c">Extraversion · Introversion</text>
+<rect x="84" y="404" width="480" height="18" rx="9" fill="#ede4d7"/>
+<rect x="84" y="404" width="262.50" height="18" rx="9" fill="#1d6a6f"/>
+<rect x="406.50" y="404" width="157.50" height="18" rx="9" fill="#cf7a31"/>
+<text x="596" y="394" font-family="Palatino Linotype, serif" font-size="22" fill="#8a4b2d">E · Extraversion</text>
+<text x="596" y="422" font-family="Palatino Linotype, serif" font-size="18" fill="#6c645c">E=5.0 · I=3.0 · margin 2.0</text>
+<text x="84" y="468" font-family="Palatino Linotype, serif" font-size="28" fill="#1a1613">SN</text>
+<text x="150" y="468" font-family="Palatino Linotype, serif" font-size="18" fill="#6c645c">Sensing · Intuition</text>
+<rect x="84" y="484" width="480" height="18" rx="9" fill="#ede4d7"/>
+<rect x="84" y="484" width="105.00" height="18" rx="9" fill="#1d6a6f"/>
+<rect x="249.00" y="484" width="315.00" height="18" rx="9" fill="#cf7a31"/>
+<text x="596" y="474" font-family="Palatino Linotype, serif" font-size="22" fill="#8a4b2d">N · Intuition</text>
+<text x="596" y="502" font-family="Palatino Linotype, serif" font-size="18" fill="#6c645c">S=1.0 · N=3.0 · margin 2.0</text>
+<text x="84" y="548" font-family="Palatino Linotype, serif" font-size="28" fill="#1a1613">TF</text>
+<text x="150" y="548" font-family="Palatino Linotype, serif" font-size="18" fill="#6c645c">Thinking · Feeling</text>
+<rect x="84" y="564" width="480" height="18" rx="9" fill="#ede4d7"/>
+<rect x="84" y="564" width="140.00" height="18" rx="9" fill="#1d6a6f"/>
+<rect x="284.00" y="564" width="280.00" height="18" rx="9" fill="#cf7a31"/>
+<text x="596" y="554" font-family="Palatino Linotype, serif" font-size="22" fill="#8a4b2d">F · Feeling</text>
+<text x="596" y="582" font-family="Palatino Linotype, serif" font-size="18" fill="#6c645c">T=2.0 · F=4.0 · margin 2.0</text>
+<text x="84" y="628" font-family="Palatino Linotype, serif" font-size="28" fill="#1a1613">JP</text>
+<text x="150" y="628" font-family="Palatino Linotype, serif" font-size="18" fill="#6c645c">Judging · Perceiving</text>
+<rect x="84" y="644" width="480" height="18" rx="9" fill="#ede4d7"/>
+<rect x="84" y="644" width="280.00" height="18" rx="9" fill="#1d6a6f"/>
+<rect x="424.00" y="644" width="140.00" height="18" rx="9" fill="#cf7a31"/>
+<text x="596" y="634" font-family="Palatino Linotype, serif" font-size="22" fill="#8a4b2d">J · Judging</text>
+<text x="596" y="662" font-family="Palatino Linotype, serif" font-size="18" fill="#6c645c">J=4.0 · P=2.0 · margin 2.0</text>
+</svg>

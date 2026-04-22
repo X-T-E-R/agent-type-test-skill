@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Validate local banks
+        run: |
+          python skills/agent-type-test/scripts/agent_type_test_runner.py validate-bank --bank mbti93-cn
+          python skills/agent-type-test/scripts/agent_type_test_runner.py validate-bank --bank mini-ipip-en
+      - name: Run self-test
+        run: |
+          python skills/agent-type-test/scripts/selftest.py
+

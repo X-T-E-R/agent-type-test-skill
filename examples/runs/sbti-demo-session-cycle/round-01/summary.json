@@ -1,0 +1,105 @@
+{
+  "type_display": "Dior-s（雕丝）",
+  "type_code": "Dior-s（雕丝）",
+  "type_name": "Dior-s（雕丝）",
+  "match_percent": 73,
+  "hit_dimensions": 8,
+  "total_dimensions": 15,
+  "type_subname": "维度命中度较高，当前结果可视为你的第一人格画像。",
+  "poster_caption": "等着我逆袭。",
+  "analysis": "恭喜！您是犬儒主义先贤第欧根尼失散多年的精神传人，因为Dior-s的全称是Diogenes' Original Realist - sage (第欧根尼的原创现实主义 - 圣人)。Dior-s人格，是对当代消费主义陷阱和成功学PUA最彻底的蔑视。Dior-s早已看穿一切”上进”的尽头不过是更高级的牢房。Dior-s有时是一种高尚的标识，有时也是一种卑微的姿态，而Dior-s们可以自由地切换状态，这是多么伟大的智慧！但更多情况下，当别人在追逐风口，被时代的巨浪拍得七荤八素时，Dior-s早已在自己的精神木桶里晒着太阳，达到了”人桶合一”的至高境界。他们信奉的不是”经验”，是经过亿万次实践检验的物理法则与生物本能。加入屌丝教派的人，必须这辈子只信两件事：一、躺着比站着舒服；二、饭点到了就得干饭。",
+  "dimensions": [
+    {
+      "name": "S1 自尊自信",
+      "grade": "M",
+      "score": 4,
+      "description": "自信值随天气波动，顺风能飞，逆风先缩。"
+    },
+    {
+      "name": "S2 自我清晰度",
+      "grade": "L",
+      "score": 3,
+      "description": "内心频道雪花较多，常在\"我是谁\"里循环缓存。"
+    },
+    {
+      "name": "S3 核心价值",
+      "grade": "M",
+      "score": 4,
+      "description": "想上进，也想躺会儿，价值排序经常内部开会。"
+    },
+    {
+      "name": "E1 依恋安全感",
+      "grade": "M",
+      "score": 4,
+      "description": "一半信任，一半试探，感情里常在心里拉锯。"
+    },
+    {
+      "name": "E2 情感投入度",
+      "grade": "L",
+      "score": 3,
+      "description": "感情投入偏克制，心门不是没开，是门禁太严。"
+    },
+    {
+      "name": "E3 边界与依赖",
+      "grade": "M",
+      "score": 4,
+      "description": "亲密和独立都要一点，属于可调节型依赖。"
+    },
+    {
+      "name": "A1 世界观倾向",
+      "grade": "M",
+      "score": 4,
+      "description": "既不天真也不彻底阴谋论，观望是你的本能。"
+    },
+    {
+      "name": "A2 规则与灵活度",
+      "grade": "H",
+      "score": 5,
+      "description": "秩序感较强，能按流程来就不爱即兴炸场。"
+    },
+    {
+      "name": "A3 人生意义感",
+      "grade": "M",
+      "score": 4,
+      "description": "偶尔有目标，偶尔也想摆烂，人生观处于半开机。"
+    },
+    {
+      "name": "Ac1 动机导向",
+      "grade": "M",
+      "score": 4,
+      "description": "有时想赢，有时只想别麻烦，动机比较混合。"
+    },
+    {
+      "name": "Ac2 决策风格",
+      "grade": "M",
+      "score": 4,
+      "description": "会想，但不至于想死机，属于正常犹豫。"
+    },
+    {
+      "name": "Ac3 执行模式",
+      "grade": "M",
+      "score": 4,
+      "description": "能做，但状态看时机，偶尔稳偶尔摆。"
+    },
+    {
+      "name": "So1 社交主动性",
+      "grade": "L",
+      "score": 3,
+      "description": "社交启动慢热，主动出击这事通常得攒半天气。"
+    },
+    {
+      "name": "So2 人际边界感",
+      "grade": "M",
+      "score": 4,
+      "description": "既想亲近又想留缝，边界感看对象调节。"
+    },
+    {
+      "name": "So3 表达与真实度",
+      "grade": "M",
+      "score": 4,
+      "description": "会看气氛说话，真实和体面通常各留一点。"
+    }
+  ],
+  "asked_questions": 8,
+  "auto_filled_questions": 23
+}

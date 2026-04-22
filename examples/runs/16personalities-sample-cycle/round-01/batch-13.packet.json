@@ -1,0 +1,158 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 13,
+  "questions": [
+    {
+      "id": "16p-037",
+      "prompt": "You are drawn to various forms of creative expression, such as writing.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-038",
+      "prompt": "You usually base your choices on objective facts rather than emotional impressions.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-039",
+      "prompt": "You like to have a to-do list for each day.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-040",
+      "prompt": "You rarely feel insecure.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "16p-037",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: 16p-037\n  prompt: You are drawn to various forms of creative expression, such as writing.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-038\n  prompt: You usually base your choices on objective facts rather than emotional impressions.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-039\n  prompt: You like to have a to-do list for each day.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-040\n  prompt: You rarely feel insecure.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree"
+}

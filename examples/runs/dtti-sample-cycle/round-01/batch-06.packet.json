@@ -1,0 +1,126 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 6,
+  "questions": [
+    {
+      "id": "dtti-026",
+      "prompt": "我内心的极度骄傲常常将我与周围的平庸之辈隔绝开来，让我感到一种既窒息又沾沾自喜的、居高临下的孤独。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-020",
+      "prompt": "面对他人的罪恶，我不会感到居高临下的愤怒，只会感到一种共犯般的悲哀——因为我们都陷入了同样的结构性绝望之中。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-019",
+      "prompt": "有时候，让肉体承受极端的屈辱和痛苦，反而能极其诡异地减轻我精神上那种无孔不入的负罪感。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-032",
+      "prompt": "我宁可被毁灭，也要把自己的耻辱公之于众，以此来彻底消解那些试图用廉价同情或物质来定义我的凝视。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "dtti-026",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: dtti-026\n  prompt: 我内心的极度骄傲常常将我与周围的平庸之辈隔绝开来，让我感到一种既窒息又沾沾自喜的、居高临下的孤独。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-020\n  prompt: 面对他人的罪恶，我不会感到居高临下的愤怒，只会感到一种共犯般的悲哀——因为我们都陷入了同样的结构性绝望之中。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-019\n  prompt: 有时候，让肉体承受极端的屈辱和痛苦，反而能极其诡异地减轻我精神上那种无孔不入的负罪感。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-032\n  prompt: 我宁可被毁灭，也要把自己的耻辱公之于众，以此来彻底消解那些试图用廉价同情或物质来定义我的凝视。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意"
+}

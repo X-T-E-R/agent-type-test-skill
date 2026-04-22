@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 20,
+  "questions": [
+    {
+      "id": "mbti-030",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "温柔"
+        },
+        {
+          "id": "B",
+          "text": "坚定"
+        }
+      ]
+    },
+    {
+      "id": "mbti-028",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "预先安排地"
+        },
+        {
+          "id": "B",
+          "text": "无计划地"
+        }
+      ]
+    },
+    {
+      "id": "mbti-084",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？",
+      "choices": [
+        {
+          "id": "A",
+          "text": "温柔"
+        },
+        {
+          "id": "B",
+          "text": "力量"
+        }
+      ]
+    },
+    {
+      "id": "mbti-091",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？",
+      "choices": [
+        {
+          "id": "A",
+          "text": "全心投入地"
+        },
+        {
+          "id": "B",
+          "text": "有决心地"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-030",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mbti-030\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 温柔\n  B. 坚定\n- id: mbti-028\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 预先安排地\n  B. 无计划地\n- id: mbti-084\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？\n  A. 温柔\n  B. 力量\n- id: mbti-091\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？\n  A. 全心投入地\n  B. 有决心地"
+}

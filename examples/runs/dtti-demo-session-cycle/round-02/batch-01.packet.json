@@ -1,0 +1,126 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 2,
+  "batch_index": 1,
+  "questions": [
+    {
+      "id": "dtti-016",
+      "prompt": "我常常认为，我的存在就是为了替我所爱的人赎罪，通过吸纳他们的污秽来确立我自身的存在价值。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-017",
+      "prompt": "我所有的极端行为（无论是行善还是作恶），都只是为了测试自己是否还能在死水一潭的生活中感受到一丝活着的刺痛感。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-026",
+      "prompt": "我内心的极度骄傲常常将我与周围的平庸之辈隔绝开来，让我感到一种既窒息又沾沾自喜的、居高临下的孤独。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    },
+    {
+      "id": "dtti-009",
+      "prompt": "所谓的道德底线，在真正的激情和本能的肉体欲望面前，不过是懦夫用来安慰自己的虚伪把戏。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "极其反对"
+        },
+        {
+          "id": "B",
+          "text": "偏向反对"
+        },
+        {
+          "id": "C",
+          "text": "中立/不确定"
+        },
+        {
+          "id": "D",
+          "text": "偏向同意"
+        },
+        {
+          "id": "E",
+          "text": "极其同意"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "dtti-016",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\n\n- id: dtti-016\n  prompt: 我常常认为，我的存在就是为了替我所爱的人赎罪，通过吸纳他们的污秽来确立我自身的存在价值。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-017\n  prompt: 我所有的极端行为（无论是行善还是作恶），都只是为了测试自己是否还能在死水一潭的生活中感受到一丝活着的刺痛感。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-026\n  prompt: 我内心的极度骄傲常常将我与周围的平庸之辈隔绝开来，让我感到一种既窒息又沾沾自喜的、居高临下的孤独。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意\n- id: dtti-009\n  prompt: 所谓的道德底线，在真正的激情和本能的肉体欲望面前，不过是懦夫用来安慰自己的虚伪把戏。\n  A. 极其反对\n  B. 偏向反对\n  C. 中立/不确定\n  D. 偏向同意\n  E. 极其同意"
+}

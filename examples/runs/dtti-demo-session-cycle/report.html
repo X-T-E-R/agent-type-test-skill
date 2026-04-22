@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DTTI Website Report</title>
+  <style>
+    :root {
+      --bg: #120e11;
+      --bg-2: #1b1315;
+      --panel: rgba(255,255,255,0.05);
+      --panel-solid: #1b1518;
+      --line: rgba(246, 196, 116, 0.18);
+      --ink: #f7efe6;
+      --muted: #ccb9a7;
+      --accent: #f0a44b;
+      --accent-2: #7c2d12;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(240,164,75,0.14), transparent 32%),
+        linear-gradient(160deg, var(--bg), #0d0a0c 62%, #130f14 100%);
+      color: var(--ink);
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 18px 56px;
+    }
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 26px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+        linear-gradient(150deg, rgba(240,164,75,0.08), transparent 45%);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+    }
+    .eyebrow {
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .title {
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1.02;
+      margin: 10px 0 0;
+      color: var(--accent);
+      word-break: break-word;
+    }
+    .subtitle {
+      margin-top: 12px;
+      font-size: 20px;
+      color: #f3ddc2;
+    }
+    .hero-note {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 760px;
+    }
+    .source-panel {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: var(--panel);
+    }
+    .source-link {
+      color: #ffd59d;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(240,164,75,0.45);
+      word-break: break-all;
+    }
+    .source-intro {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .stat-chip {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: var(--panel);
+    }
+    .stat-label {
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .stat-value {
+      margin-top: 6px;
+      font-size: 22px;
+      color: var(--ink);
+    }
+    .section-kicker {
+      margin: 28px 0 14px;
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-size: 13px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+      background: var(--panel);
+      min-height: 132px;
+    }
+    .card-label {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card-value {
+      margin-top: 10px;
+      font-size: 26px;
+      color: var(--ink);
+      line-height: 1.2;
+      word-break: break-word;
+    }
+    .card-detail {
+      margin-top: 10px;
+      color: #dbc6b3;
+      line-height: 1.6;
+      min-height: 1.6em;
+    }
+    .panel {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      background: var(--panel-solid);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      font-weight: normal;
+    }
+    @media (max-width: 720px) {
+      .wrap { padding: 18px 12px 42px; }
+      .hero { padding: 20px; }
+      .subtitle { font-size: 18px; }
+      th, td { display: block; }
+      thead { display: none; }
+      tr { display: block; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      tbody tr:last-child { border-bottom: 0; }
+      td { border-bottom: 0; padding: 4px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">DTTI Aggregate Character</div>
+      <div class="title">阿廖沙·卡拉马佐夫</div>
+      <div class="subtitle">Profile Consistency: 0.50</div>
+      <div class="hero-note">按网站脚本提取的题库本地计分，再把多轮结果聚合。</div>
+      <div class="source-panel">
+        <div class="eyebrow">Source Site</div>
+        <div><a class="source-link" href="https://justmonikangel.github.io/-/" target="_blank" rel="noopener noreferrer">DTTI · https://justmonikangel.github.io/-/</a></div>
+        <div class="source-intro">GitHub Pages 上的前端人格测试，题库和计分逻辑都在页面脚本里，适合本地提取后 staged 执行。</div>
+      </div>
+      <div class="stats">
+        <div class="stat-chip">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">dtti</div>
+        </div>
+        
+        <div class="stat-chip">
+          <div class="stat-label">Rounds</div>
+          <div class="stat-value">2</div>
+        </div>
+        
+        <div class="stat-chip">
+          <div class="stat-label">AI-Answered</div>
+          <div class="stat-value">16</div>
+        </div>
+        </div>
+    </section>
+    
+        <section>
+          <div class="section-kicker">Aggregate Scores</div>
+          <div class="card-grid">
+            <article class="card">
+              <div class="card-label">斯塔夫罗金</div>
+              <div class="card-value">4.5</div>
+              <div class="card-detail"></div>
+            </article>
+            
+            <article class="card">
+              <div class="card-label">阿芙朵嘉</div>
+              <div class="card-value">2.0</div>
+              <div class="card-detail"></div>
+            </article>
+            
+            <article class="card">
+              <div class="card-label">索尼娅</div>
+              <div class="card-value">1.5</div>
+              <div class="card-detail"></div>
+            </article>
+            
+            <article class="card">
+              <div class="card-label">伊万·卡拉马佐夫</div>
+              <div class="card-value">1.0</div>
+              <div class="card-detail"></div>
+            </article>
+            
+            <article class="card">
+              <div class="card-label">彼得·韦尔霍文斯基</div>
+              <div class="card-value">1.0</div>
+              <div class="card-detail"></div>
+            </article>
+            
+            <article class="card">
+              <div class="card-label">梅什金公爵</div>
+              <div class="card-value">0.0</div>
+              <div class="card-detail"></div>
+            </article>
+            
+            <article class="card">
+              <div class="card-label">阿廖沙·卡拉马佐夫</div>
+              <div class="card-value">0.0</div>
+              <div class="card-detail"></div>
+            </article>
+            
+            <article class="card">
+              <div class="card-label">丽萨</div>
+              <div class="card-value">0.0</div>
+              <div class="card-detail"></div>
+            </article>
+            </div>
+        </section>
+        
+    
+    
+        <section class="panel">
+          <div class="section-kicker">Round Results</div>
+          <table>
+            <thead>
+              <tr><th>Round</th><th>Character</th><th>Consistency</th><th>Validation</th></tr>
+            </thead>
+            <tbody><tr><td>Round 1</td><td>阿廖沙·卡拉马佐夫</td><td>87.5</td><td>样本逻辑一致性校验通过。</td></tr><tr><td>Round 2</td><td>伊万·卡拉马佐夫</td><td>87.5</td><td>样本逻辑一致性校验通过。</td></tr></tbody>
+          </table>
+        </section>
+        
+  </div>
+</body>
+</html>

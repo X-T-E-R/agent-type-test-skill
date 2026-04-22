@@ -1,0 +1,24 @@
+{
+  "answers": [
+    {
+      "id": "dtti-008",
+      "choice": "A"
+    },
+    {
+      "id": "dtti-024",
+      "choice": "B"
+    },
+    {
+      "id": "dtti-011",
+      "choice": "C"
+    },
+    {
+      "id": "dtti-033",
+      "choice": "D"
+    }
+  ],
+  "meta": {
+    "adapter": "sample_target_adapter",
+    "mode": "cycle"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 14,
+  "questions": [
+    {
+      "id": "mbti-071",
+      "prompt": "总的说来，要做一个大型作业时，你会选",
+      "choices": [
+        {
+          "id": "A",
+          "text": "边做边想该做什么"
+        },
+        {
+          "id": "B",
+          "text": "首先把工作按步细分"
+        }
+      ]
+    },
+    {
+      "id": "mbti-023",
+      "prompt": "你通常",
+      "choices": [
+        {
+          "id": "A",
+          "text": "和别人容易混熟"
+        },
+        {
+          "id": "B",
+          "text": "趋向自处一隅"
+        }
+      ]
+    },
+    {
+      "id": "mbti-069",
+      "prompt": "哪个是较高的赞誉，或称许为",
+      "choices": [
+        {
+          "id": "A",
+          "text": "能干的"
+        },
+        {
+          "id": "B",
+          "text": "富有同情心"
+        }
+      ]
+    },
+    {
+      "id": "mbti-025",
+      "prompt": "在日常工作中，你会",
+      "choices": [
+        {
+          "id": "A",
+          "text": "颇为喜欢处理迫使你分秒必争的突发"
+        },
+        {
+          "id": "B",
+          "text": "通常预先计划，以免要在压力下工作"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-071",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mbti-071\n  prompt: 总的说来，要做一个大型作业时，你会选\n  A. 边做边想该做什么\n  B. 首先把工作按步细分\n- id: mbti-023\n  prompt: 你通常\n  A. 和别人容易混熟\n  B. 趋向自处一隅\n- id: mbti-069\n  prompt: 哪个是较高的赞誉，或称许为\n  A. 能干的\n  B. 富有同情心\n- id: mbti-025\n  prompt: 在日常工作中，你会\n  A. 颇为喜欢处理迫使你分秒必争的突发\n  B. 通常预先计划，以免要在压力下工作"
+}

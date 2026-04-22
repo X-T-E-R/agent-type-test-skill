@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Local environments
+.venv/
+venv/
+.python-version
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.superpowers/
+
+# Local outputs
+tmp/*
+!tmp/.gitkeep

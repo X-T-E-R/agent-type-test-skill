@@ -1,0 +1,158 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 3,
+  "questions": [
+    {
+      "id": "16p-007",
+      "prompt": "You prioritize and plan tasks effectively, often completing them well before the deadline.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-008",
+      "prompt": "People’s stories and emotions speak louder to you than numbers or data.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-009",
+      "prompt": "You like to use organizing tools like schedules and lists.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    },
+    {
+      "id": "16p-010",
+      "prompt": "Even a small mistake can cause you to doubt your overall abilities and knowledge.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "I strongly agree"
+        },
+        {
+          "id": "B",
+          "text": "I moderately agree"
+        },
+        {
+          "id": "C",
+          "text": "I agree"
+        },
+        {
+          "id": "D",
+          "text": "I am not sure"
+        },
+        {
+          "id": "E",
+          "text": "I disagree"
+        },
+        {
+          "id": "F",
+          "text": "I moderately disagree"
+        },
+        {
+          "id": "G",
+          "text": "I strongly disagree"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "16p-007",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: 16p-007\n  prompt: You prioritize and plan tasks effectively, often completing them well before the deadline.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-008\n  prompt: People’s stories and emotions speak louder to you than numbers or data.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-009\n  prompt: You like to use organizing tools like schedules and lists.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree\n- id: 16p-010\n  prompt: Even a small mistake can cause you to doubt your overall abilities and knowledge.\n  A. I strongly agree\n  B. I moderately agree\n  C. I agree\n  D. I am not sure\n  E. I disagree\n  F. I moderately disagree\n  G. I strongly disagree"
+}

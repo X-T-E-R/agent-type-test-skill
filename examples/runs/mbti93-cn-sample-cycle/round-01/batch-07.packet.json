@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 7,
+  "questions": [
+    {
+      "id": "mbti-034",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "热衷"
+        },
+        {
+          "id": "B",
+          "text": "文静"
+        }
+      ]
+    },
+    {
+      "id": "mbti-009",
+      "prompt": "按照程序表做事",
+      "choices": [
+        {
+          "id": "A",
+          "text": "合你心意"
+        },
+        {
+          "id": "B",
+          "text": "令你感到束缚"
+        }
+      ]
+    },
+    {
+      "id": "mbti-038",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "敏感"
+        },
+        {
+          "id": "B",
+          "text": "公正"
+        }
+      ]
+    },
+    {
+      "id": "mbti-075",
+      "prompt": "你宁愿替哪一类上司（或者老师）工作？",
+      "choices": [
+        {
+          "id": "A",
+          "text": "天性淳良，但常常前后不一的"
+        },
+        {
+          "id": "B",
+          "text": "言辞尖锐但永远合乎逻辑的"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-034",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mbti-034\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 热衷\n  B. 文静\n- id: mbti-009\n  prompt: 按照程序表做事\n  A. 合你心意\n  B. 令你感到束缚\n- id: mbti-038\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 敏感\n  B. 公正\n- id: mbti-075\n  prompt: 你宁愿替哪一类上司（或者老师）工作？\n  A. 天性淳良，但常常前后不一的\n  B. 言辞尖锐但永远合乎逻辑的"
+}

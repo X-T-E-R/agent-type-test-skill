@@ -1,0 +1,245 @@
+{
+  "aggregate": {
+    "family": "big-five",
+    "report_mode": "dimension_scores",
+    "code": null,
+    "dimensions": [
+      {
+        "id": "EX",
+        "left": {
+          "code": "R",
+          "label": "Reserved",
+          "score": 3.0
+        },
+        "right": {
+          "code": "E",
+          "label": "Extraverted",
+          "score": 0.0
+        },
+        "winner": {
+          "side": "left",
+          "code": "R",
+          "label": "Reserved"
+        },
+        "margin": 3.0
+      },
+      {
+        "id": "AG",
+        "left": {
+          "code": "T",
+          "label": "Tough-Minded",
+          "score": 1.0
+        },
+        "right": {
+          "code": "A",
+          "label": "Agreeable",
+          "score": 5.0
+        },
+        "winner": {
+          "side": "right",
+          "code": "A",
+          "label": "Agreeable"
+        },
+        "margin": 4.0
+      },
+      {
+        "id": "CO",
+        "left": {
+          "code": "L",
+          "label": "Loose",
+          "score": 4.0
+        },
+        "right": {
+          "code": "C",
+          "label": "Conscientious",
+          "score": 1.0
+        },
+        "winner": {
+          "side": "left",
+          "code": "L",
+          "label": "Loose"
+        },
+        "margin": 3.0
+      },
+      {
+        "id": "ES",
+        "left": {
+          "code": "S",
+          "label": "Emotionally Stable",
+          "score": 2.0
+        },
+        "right": {
+          "code": "N",
+          "label": "Neurotic",
+          "score": 0.0
+        },
+        "winner": {
+          "side": "left",
+          "code": "S",
+          "label": "Emotionally Stable"
+        },
+        "margin": 2.0
+      },
+      {
+        "id": "OP",
+        "left": {
+          "code": "P",
+          "label": "Practical",
+          "score": 1.0
+        },
+        "right": {
+          "code": "O",
+          "label": "Open / Imaginative",
+          "score": 3.0
+        },
+        "winner": {
+          "side": "right",
+          "code": "O",
+          "label": "Open / Imaginative"
+        },
+        "margin": 2.0
+      }
+    ]
+  },
+  "code_consistency": null,
+  "dimension_consistency": [
+    {
+      "id": "EX",
+      "dominant_code": "R",
+      "consistency": 1.0
+    },
+    {
+      "id": "AG",
+      "dominant_code": "A",
+      "consistency": 1.0
+    },
+    {
+      "id": "CO",
+      "dominant_code": "L",
+      "consistency": 1.0
+    },
+    {
+      "id": "ES",
+      "dominant_code": "S",
+      "consistency": 1.0
+    },
+    {
+      "id": "OP",
+      "dominant_code": "O",
+      "consistency": 1.0
+    }
+  ],
+  "rounds": [
+    {
+      "family": "big-five",
+      "report_mode": "dimension_scores",
+      "code": null,
+      "dimensions": [
+        {
+          "id": "EX",
+          "left": {
+            "code": "R",
+            "label": "Reserved",
+            "score": 3.0
+          },
+          "right": {
+            "code": "E",
+            "label": "Extraverted",
+            "score": 0.0
+          },
+          "winner": {
+            "side": "left",
+            "code": "R",
+            "label": "Reserved"
+          },
+          "margin": 3.0
+        },
+        {
+          "id": "AG",
+          "left": {
+            "code": "T",
+            "label": "Tough-Minded",
+            "score": 1.0
+          },
+          "right": {
+            "code": "A",
+            "label": "Agreeable",
+            "score": 5.0
+          },
+          "winner": {
+            "side": "right",
+            "code": "A",
+            "label": "Agreeable"
+          },
+          "margin": 4.0
+        },
+        {
+          "id": "CO",
+          "left": {
+            "code": "L",
+            "label": "Loose",
+            "score": 4.0
+          },
+          "right": {
+            "code": "C",
+            "label": "Conscientious",
+            "score": 1.0
+          },
+          "winner": {
+            "side": "left",
+            "code": "L",
+            "label": "Loose"
+          },
+          "margin": 3.0
+        },
+        {
+          "id": "ES",
+          "left": {
+            "code": "S",
+            "label": "Emotionally Stable",
+            "score": 2.0
+          },
+          "right": {
+            "code": "N",
+            "label": "Neurotic",
+            "score": 0.0
+          },
+          "winner": {
+            "side": "left",
+            "code": "S",
+            "label": "Emotionally Stable"
+          },
+          "margin": 2.0
+        },
+        {
+          "id": "OP",
+          "left": {
+            "code": "P",
+            "label": "Practical",
+            "score": 1.0
+          },
+          "right": {
+            "code": "O",
+            "label": "Open / Imaginative",
+            "score": 3.0
+          },
+          "winner": {
+            "side": "right",
+            "code": "O",
+            "label": "Open / Imaginative"
+          },
+          "margin": 2.0
+        }
+      ]
+    }
+  ],
+  "bank": {
+    "title": "Mini-IPIP 20 (en)",
+    "description": "Public-domain Mini-IPIP Big Five bank.",
+    "blind_label": "short questionnaire",
+    "question_count": 20,
+    "asked_question_count": 20,
+    "round_count": 1,
+    "run_mode": "full"
+  }
+}

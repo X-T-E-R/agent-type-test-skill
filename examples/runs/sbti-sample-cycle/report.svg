@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+<rect width="1200" height="760" fill="#120e11"/>
+<rect x="40" y="36" width="1120" height="688" rx="28" fill="#1b1518" stroke="rgba(246,196,116,0.18)"/>
+<text x="84" y="98" font-family="Palatino Linotype, serif" font-size="22" fill="#ccb9a7">SBTI Aggregate Type</text>
+<text x="84" y="180" font-family="Palatino Linotype, serif" font-size="66" fill="#f0a44b">LOVE-R（多情者）</text>
+<text x="84" y="222" font-family="Palatino Linotype, serif" font-size="24" fill="#f7efe6">Profile consistency: 1.00</text>
+<text x="84" y="258" font-family="Palatino Linotype, serif" font-size="18" fill="#ccb9a7">SBTI Bilibili</text>
+<text x="84" y="286" font-family="Palatino Linotype, serif" font-size="16" fill="#ccb9a7">https://www.bilibili.com/blackboard/era/WijKT2bWuCJWPg8B.html</text>
+<rect x="84" y="316" width="470" height="76" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(246,196,116,0.18)"/>
+<text x="102" y="346" font-family="Palatino Linotype, serif" font-size="20" fill="#ccb9a7">E1 依恋安全感</text>
+<text x="102" y="374" font-family="Palatino Linotype, serif" font-size="28" fill="#f7efe6">6.0 / 4</text>
+<rect x="594" y="316" width="470" height="76" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(246,196,116,0.18)"/>
+<text x="612" y="346" font-family="Palatino Linotype, serif" font-size="20" fill="#ccb9a7">S3 核心价值</text>
+<text x="612" y="374" font-family="Palatino Linotype, serif" font-size="28" fill="#f7efe6">6.0 / 4</text>
+<rect x="84" y="408" width="470" height="76" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(246,196,116,0.18)"/>
+<text x="102" y="438" font-family="Palatino Linotype, serif" font-size="20" fill="#ccb9a7">A1 世界观倾向</text>
+<text x="102" y="466" font-family="Palatino Linotype, serif" font-size="28" fill="#f7efe6">5.0 / 4</text>
+<rect x="594" y="408" width="470" height="76" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(246,196,116,0.18)"/>
+<text x="612" y="438" font-family="Palatino Linotype, serif" font-size="20" fill="#ccb9a7">A3 人生意义感</text>
+<text x="612" y="466" font-family="Palatino Linotype, serif" font-size="28" fill="#f7efe6">5.0 / 4</text>
+<rect x="84" y="500" width="470" height="76" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(246,196,116,0.18)"/>
+<text x="102" y="530" font-family="Palatino Linotype, serif" font-size="20" fill="#ccb9a7">Ac1 动机导向</text>
+<text x="102" y="558" font-family="Palatino Linotype, serif" font-size="28" fill="#f7efe6">4.0 / 4</text>
+<rect x="594" y="500" width="470" height="76" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(246,196,116,0.18)"/>
+<text x="612" y="530" font-family="Palatino Linotype, serif" font-size="20" fill="#ccb9a7">So1 社交主动性</text>
+<text x="612" y="558" font-family="Palatino Linotype, serif" font-size="28" fill="#f7efe6">4.0 / 4</text>
+<rect x="84" y="592" width="470" height="76" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(246,196,116,0.18)"/>
+<text x="102" y="622" font-family="Palatino Linotype, serif" font-size="20" fill="#ccb9a7">A2 规则与灵活度</text>
+<text x="102" y="650" font-family="Palatino Linotype, serif" font-size="28" fill="#f7efe6">3.0 / 4</text>
+<rect x="594" y="592" width="470" height="76" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(246,196,116,0.18)"/>
+<text x="612" y="622" font-family="Palatino Linotype, serif" font-size="20" fill="#ccb9a7">E2 情感投入度</text>
+<text x="612" y="650" font-family="Palatino Linotype, serif" font-size="28" fill="#f7efe6">3.0 / 4</text>
+</svg>

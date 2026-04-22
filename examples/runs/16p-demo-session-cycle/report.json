@@ -1,0 +1,158 @@
+{
+  "adapter": "16personalities",
+  "family": "mbti",
+  "source": {
+    "id": "16personalities",
+    "label": "16Personalities",
+    "entry_url": "https://www.16personalities.com/",
+    "discovery_url": "https://www.16personalities.com/free-personality-test",
+    "short_intro": "标准 MBTI 风格在线测试站，已接 staged browser flow，可分批发题并从结果页抽取类型和维度。",
+    "family": "mbti",
+    "status": "implemented"
+  },
+  "generated_at": "2026-04-22T10:42:11",
+  "data": {
+    "aggregate_type_code": "INFJ-A",
+    "aggregate_type_name": "Advocate",
+    "profile_consistency": 1.0,
+    "aggregate_dimensions": [
+      {
+        "name": "Energy",
+        "average_percent": 52,
+        "dominant_winner": "Introverted",
+        "winner_consistency": 1.0
+      },
+      {
+        "name": "Mind",
+        "average_percent": 51,
+        "dominant_winner": "Intuitive",
+        "winner_consistency": 1.0
+      },
+      {
+        "name": "Nature",
+        "average_percent": 57,
+        "dominant_winner": "Feeling",
+        "winner_consistency": 1.0
+      },
+      {
+        "name": "Tactics",
+        "average_percent": 54,
+        "dominant_winner": "Judging",
+        "winner_consistency": 1.0
+      },
+      {
+        "name": "Identity",
+        "average_percent": 54,
+        "dominant_winner": "Assertive",
+        "winner_consistency": 1.0
+      }
+    ],
+    "average_asked_questions": 8,
+    "average_auto_filled_questions": 52,
+    "rounds": [
+      {
+        "type_code": "INFJ-A",
+        "type_name": "Advocate",
+        "profile_url": "https://www.16personalities.com/profiles/infj-a/x/12an9nsso",
+        "dimensions": [
+          {
+            "name": "Energy",
+            "percent": 52,
+            "winner": "Introverted"
+          },
+          {
+            "name": "Mind",
+            "percent": 51,
+            "winner": "Intuitive"
+          },
+          {
+            "name": "Nature",
+            "percent": 57,
+            "winner": "Feeling"
+          },
+          {
+            "name": "Tactics",
+            "percent": 54,
+            "winner": "Judging"
+          },
+          {
+            "name": "Identity",
+            "percent": 54,
+            "winner": "Assertive"
+          }
+        ],
+        "asked_questions": 8,
+        "auto_filled_questions": 52
+      }
+    ]
+  },
+  "view": {
+    "page_title": "16Personalities Website Report",
+    "hero_eyebrow": "16Personalities Aggregate Type",
+    "hero_title": "INFJ-A",
+    "hero_subtitle": "Advocate · Profile consistency 1.00",
+    "hero_note": "真实网站浏览器流程跑完 60 题并读取结果页；平均有 52 题由适配器用中立项补齐。",
+    "stat_chips": [
+      {
+        "label": "Family",
+        "value": "mbti"
+      },
+      {
+        "label": "Rounds",
+        "value": "1"
+      },
+      {
+        "label": "AI-Answered",
+        "value": "8 / 60"
+      },
+      {
+        "label": "Auto-Filled",
+        "value": "52 / 60"
+      }
+    ],
+    "cards_heading": "Aggregate Dimensions",
+    "cards": [
+      {
+        "label": "Energy",
+        "value": "52.0% Introverted",
+        "detail": "winner consistency 1.00"
+      },
+      {
+        "label": "Mind",
+        "value": "51.0% Intuitive",
+        "detail": "winner consistency 1.00"
+      },
+      {
+        "label": "Nature",
+        "value": "57.0% Feeling",
+        "detail": "winner consistency 1.00"
+      },
+      {
+        "label": "Tactics",
+        "value": "54.0% Judging",
+        "detail": "winner consistency 1.00"
+      },
+      {
+        "label": "Identity",
+        "value": "54.0% Assertive",
+        "detail": "winner consistency 1.00"
+      }
+    ],
+    "detail_heading": "",
+    "detail_columns": [],
+    "detail_rows": [],
+    "round_heading": "Round Results",
+    "round_columns": [
+      "Round",
+      "Type",
+      "Snapshot"
+    ],
+    "round_rows": [
+      [
+        "Round 1",
+        "INFJ-A · Advocate",
+        "Energy 52% Introverted · Mind 51% Intuitive · Nature 57% Feeling · Tactics 54% Judging · Identity 54% Assertive"
+      ]
+    ]
+  }
+}

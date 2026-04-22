@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 15,
+  "questions": [
+    {
+      "id": "mbti-006",
+      "prompt": "你是否经常让",
+      "choices": [
+        {
+          "id": "A",
+          "text": "你的情感支配你的理智"
+        },
+        {
+          "id": "B",
+          "text": "你的理智主宰你的情感"
+        }
+      ]
+    },
+    {
+      "id": "mbti-007",
+      "prompt": "处理许多事情上，你会喜欢",
+      "choices": [
+        {
+          "id": "A",
+          "text": "凭兴所至行事"
+        },
+        {
+          "id": "B",
+          "text": "按照计划行事"
+        }
+      ]
+    },
+    {
+      "id": "mbti-022",
+      "prompt": "在社交聚会中，你",
+      "choices": [
+        {
+          "id": "A",
+          "text": "有时感到郁闷"
+        },
+        {
+          "id": "B",
+          "text": "常常乐在其中"
+        }
+      ]
+    },
+    {
+      "id": "mbti-049",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "有系统"
+        },
+        {
+          "id": "B",
+          "text": "即兴"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-006",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mbti-006\n  prompt: 你是否经常让\n  A. 你的情感支配你的理智\n  B. 你的理智主宰你的情感\n- id: mbti-007\n  prompt: 处理许多事情上，你会喜欢\n  A. 凭兴所至行事\n  B. 按照计划行事\n- id: mbti-022\n  prompt: 在社交聚会中，你\n  A. 有时感到郁闷\n  B. 常常乐在其中\n- id: mbti-049\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 有系统\n  B. 即兴"
+}

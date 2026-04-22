@@ -1,0 +1,126 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 5,
+  "questions": [
+    {
+      "id": "mini-ipip-008",
+      "prompt": "Am not interested in other people's problems.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-009",
+      "prompt": "Get chores done right away.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-001",
+      "prompt": "Am the life of the party.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-004",
+      "prompt": "Keep in the background.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mini-ipip-008",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mini-ipip-008\n  prompt: Am not interested in other people's problems.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-009\n  prompt: Get chores done right away.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-001\n  prompt: Am the life of the party.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-004\n  prompt: Keep in the background.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree"
+}

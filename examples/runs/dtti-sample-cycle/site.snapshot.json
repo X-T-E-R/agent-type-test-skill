@@ -1,0 +1,29 @@
+{
+  "source_url": "https://justmonikangel.github.io/-/",
+  "characters": {
+    "RASKOLNIKOV": "拉斯科尔尼科夫",
+    "MYSHKIN": "梅什金公爵",
+    "IVAN": "伊万·卡拉马佐夫",
+    "ALYOSHA": "阿廖沙·卡拉马佐夫",
+    "DMITRI": "德米特里·卡拉马佐夫",
+    "STAVROGIN": "斯塔夫罗金",
+    "PYOTR": "彼得·韦尔霍文斯基",
+    "SONYA": "索尼娅",
+    "LISE": "丽萨",
+    "KATERINA": "卡捷琳娜",
+    "DUNYA": "阿芙朵嘉",
+    "NASTASYA": "娜斯塔霞",
+    "NASTENKA": "娜斯金卡",
+    "UNDERGROUND": "地下室人",
+    "SMERDYAKOV": "斯麦尔佳科夫"
+  },
+  "adapter": {
+    "id": "dtti",
+    "label": "DTTI",
+    "entry_url": "https://justmonikangel.github.io/-/",
+    "discovery_url": "https://justmonikangel.github.io/-/",
+    "short_intro": "GitHub Pages 上的前端人格测试，题库和计分逻辑都在页面脚本里，适合本地提取后 staged 执行。",
+    "family": "dtti",
+    "status": "implemented"
+  }
+}

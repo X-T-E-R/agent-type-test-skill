@@ -1,0 +1,78 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 12,
+  "questions": [
+    {
+      "id": "mbti-056",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "富同情"
+        },
+        {
+          "id": "B",
+          "text": "合逻辑"
+        }
+      ]
+    },
+    {
+      "id": "mbti-008",
+      "prompt": "你是否",
+      "choices": [
+        {
+          "id": "A",
+          "text": "容易让人了解"
+        },
+        {
+          "id": "B",
+          "text": "难于让人了解"
+        }
+      ]
+    },
+    {
+      "id": "mbti-035",
+      "prompt": "在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。",
+      "choices": [
+        {
+          "id": "A",
+          "text": "文静"
+        },
+        {
+          "id": "B",
+          "text": "外向"
+        }
+      ]
+    },
+    {
+      "id": "mbti-077",
+      "prompt": "你是否",
+      "choices": [
+        {
+          "id": "A",
+          "text": "可以和任何人按需求从容地交谈"
+        },
+        {
+          "id": "B",
+          "text": "只是对某些人或在某种情况下才可以畅所欲言"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mbti-056",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mbti-056\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 富同情\n  B. 合逻辑\n- id: mbti-008\n  prompt: 你是否\n  A. 容易让人了解\n  B. 难于让人了解\n- id: mbti-035\n  prompt: 在下列每一对词语中，哪一个词语更合你心意？请仔细想想这些词语的意义，而不要理会他们的字形或读音。\n  A. 文静\n  B. 外向\n- id: mbti-077\n  prompt: 你是否\n  A. 可以和任何人按需求从容地交谈\n  B. 只是对某些人或在某种情况下才可以畅所欲言"
+}

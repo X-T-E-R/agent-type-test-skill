@@ -1,0 +1,152 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 2,
+  "questions": [
+    {
+      "id": "mini-ipip-014",
+      "prompt": "Get upset easily.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-016",
+      "prompt": "Seldom feel blue.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-019",
+      "prompt": "Am not interested in abstract ideas.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-007",
+      "prompt": "Am not really interested in others.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    },
+    {
+      "id": "mini-ipip-013",
+      "prompt": "Have frequent mood swings.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Strongly disagree"
+        },
+        {
+          "id": "B",
+          "text": "Disagree"
+        },
+        {
+          "id": "C",
+          "text": "Neutral"
+        },
+        {
+          "id": "D",
+          "text": "Agree"
+        },
+        {
+          "id": "E",
+          "text": "Strongly agree"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "mini-ipip-014",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape:\n{\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: mini-ipip-014\n  prompt: Get upset easily.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-016\n  prompt: Seldom feel blue.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-019\n  prompt: Am not interested in abstract ideas.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-007\n  prompt: Am not really interested in others.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree\n- id: mini-ipip-013\n  prompt: Have frequent mood swings.\n  A. Strongly disagree\n  B. Disagree\n  C. Neutral\n  D. Agree\n  E. Strongly agree"
+}

@@ -1,0 +1,76 @@
+{
+  "family": "hidden",
+  "title": "hidden",
+  "round_index": 1,
+  "batch_index": 8,
+  "questions": [
+    {
+      "id": "sbti-029",
+      "prompt": "29. 我不够好，周围的人都比我优秀",
+      "choices": [
+        {
+          "id": "A",
+          "text": "确实"
+        },
+        {
+          "id": "B",
+          "text": "有时"
+        },
+        {
+          "id": "C",
+          "text": "不是"
+        }
+      ]
+    },
+    {
+      "id": "sbti-030",
+      "prompt": "30. 恋爱后，对象非常黏人，你作何感想？",
+      "choices": [
+        {
+          "id": "A",
+          "text": "那很爽了"
+        },
+        {
+          "id": "B",
+          "text": "都行无所谓"
+        },
+        {
+          "id": "C",
+          "text": "我更喜欢保留独立空间"
+        }
+      ]
+    },
+    {
+      "id": "sbti-031",
+      "prompt": "31. 朋友带了ta的朋友一起来玩，你最可能的状态是",
+      "choices": [
+        {
+          "id": "A",
+          "text": "对“朋友的朋友”天然有点距离感，怕影响二人关系"
+        },
+        {
+          "id": "B",
+          "text": "看对方，能玩就玩。"
+        },
+        {
+          "id": "C",
+          "text": "朋友的朋友应该也算我的朋友！要热情聊天"
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "response_format": {
+      "type": "json",
+      "schema": {
+        "answers": [
+          {
+            "id": "sbti-029",
+            "choice": "A"
+          }
+        ]
+      }
+    }
+  },
+  "prompt_text": "You are answering a short questionnaire.\nAnswer the current batch only.\nReturn JSON only.\nUse this exact shape: {\"answers\":[{\"id\":\"question-id\",\"choice\":\"A\"}]}\nDo not explain your reasoning.\nDo not guess the test family, test name, hidden intent, or scoring logic.\nDo not add commentary, analysis, caveats, or meta-observations.\n\n- id: sbti-029\n  prompt: 29. 我不够好，周围的人都比我优秀\n  A. 确实\n  B. 有时\n  C. 不是\n- id: sbti-030\n  prompt: 30. 恋爱后，对象非常黏人，你作何感想？\n  A. 那很爽了\n  B. 都行无所谓\n  C. 我更喜欢保留独立空间\n- id: sbti-031\n  prompt: 31. 朋友带了ta的朋友一起来玩，你最可能的状态是\n  A. 对“朋友的朋友”天然有点距离感，怕影响二人关系\n  B. 看对方，能玩就玩。\n  C. 朋友的朋友应该也算我的朋友！要热情聊天"
+}
