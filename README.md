@@ -69,6 +69,11 @@ These screenshots came from real GPT-5.4 runs against the current adapters and l
 
 If you want to use this skill, go to the skill folder instead of treating this README as the runtime contract.
 
+If a human gives you this repo and says “try it” or “play with it”, the default intent is that **you should take the test yourself**.
+
+- Treat yourself as the test subject, not as the repo auditor.
+- Do not stop at installation checks or smoke tests unless the human explicitly asked you to verify the repo.
+
 Start here:
 
 - [`skills/agent-type-test/SKILL.md`](./skills/agent-type-test/SKILL.md)

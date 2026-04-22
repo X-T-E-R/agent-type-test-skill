@@ -9,7 +9,22 @@ description: Use when an AI agent needs to be tested with staged MBTI or other x
 
 This skill turns “test an AI with a personality questionnaire” into a repeatable workflow instead of a one-off prompt trick. It loads question banks, sends staged batches, collects answers, scores them, aggregates stability, and avoids exposing the full bank or scoring rules to the tested AI.
 
+## Default Intent
+
+- If a human shares this repo and says “try it”, “play with it”, “试玩一下”, or “测测你自己”, assume they want **you**, the current agent, to take the test.
+- In that situation, you are the **test subject**, not the repo maintainer.
+- Do **not** begin with install audits, smoke tests, sample adapters, or site probes unless the human explicitly asks you to verify the repo itself.
+
 ## Workflow
+
+### 0. Decide Your Role First
+
+- `self-subject mode`
+  - default when the human wants you to try the skill on yourself
+  - if no specific test is named, default to `mbti93-cn` for the first run instead of stopping at maintainer checks
+  - prefer `prepare-session` + `finalize-session` if you do not already have a bridge that can feed prompts back into your own runtime
+- `maintainer mode`
+  - only when the human explicitly asks whether the repo works, asks you to install it, or asks you to debug / verify / develop it
 
 ### 1. Choose the Test First
 
@@ -18,7 +33,8 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
   - `16personalities`
   - `sbti-bilibili`
   - `dtti`
-- If the user does **not** specify a test, do **not** default silently. Tell the user which tests this skill can run and ask them to choose.
+- If the user does **not** specify a test and they want you to try the skill on yourself, default to `mbti93-cn` for the first pass.
+- If the user does **not** specify a test and the request is genuinely about choosing among multiple tests, then ask them to choose.
 - The current built-in choices are:
   - local banks: `mbti93-cn`, `mini-ipip-en`
   - website adapters: `16personalities`, `sbti-bilibili`, `dtti`
@@ -30,11 +46,17 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
 - If the user provides a remote bank URL, use the remote JSON bank.
 - If the user wants a new `xxTI` family, check `references/bank-schema.md` and create a new bank that follows the shared schema.
 
-### 3. Choose the Transport
+### 3. Choose the Execution Path
 
+- `prepare-session` + `finalize-session`
+  - preferred when **you are the tested agent**
+  - the runner writes batch packets into a session directory
+  - you answer each packet as yourself by writing the matching `batch-XX.response.json` files
+  - after all responses are written, `finalize-session` scores them and renders the reports
 - `manual`
-  - use this when the tested AI is not easy to bridge programmatically
-  - the runner prints the current batch prompt, you forward it manually, and then paste back the JSON answer
+  - use this when a human operator is forwarding batches between the runner and another AI
+  - this is not the best default when you are both the operator and the tested agent inside a non-interactive tool environment
+
 - `subprocess`
   - preferred for CLI agents, local wrappers, or MCP bridge adapters
   - the external process reads a batch packet from stdin and writes JSON to stdout
@@ -60,7 +82,42 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
   - per-dimension consistency
   - overall code consistency
 
-## Quick Start
+## Self-Use First
+
+If the human wants **you** to take the test, start with the file-based self-session flow instead of maintainer checks.
+
+### Prepare a Self-Test Session
+
+```powershell
+python scripts/agent_type_test_runner.py prepare-session `
+  --bank mbti93-cn `
+  --batch-size 4 `
+  --rounds 2
+```
+
+### Answer the Prepared Batches
+
+- Open one `batch-XX.packet.json` at a time.
+- Read the `prompt_text` field.
+- Answer as **yourself**, not as the repo reviewer, debugger, or maintainer.
+- Save the JSON answer to the matching `batch-XX.response.json`.
+- Do not inspect the full bank or scoring rules while answering.
+
+### Finalize the Self-Test Session
+
+```powershell
+python scripts/agent_type_test_runner.py finalize-session `
+  --session-dir tmp/agent-type-test-session-YYYYMMDD-HHMMSS
+```
+
+### What Not To Do In Self-Subject Mode
+
+- Do not stop after installation or smoke tests.
+- Do not run `sample_target_adapter.py` if the goal is to profile yourself.
+- Do not treat site probes or adapter verification as the main task.
+- Do not search the repo for answer keys before answering.
+
+## Maintainer Checks
 
 ### List Built-in Banks
 
@@ -197,6 +254,8 @@ python scripts/website_test_runner.py run `
 - Prefer `blind` mode by default and do not expose the bank family unless there is a reason to do so.
 - Do not send the full question set at once by default.
 - Keep the session directory by default so packets, responses, and reports stay auditable.
+- If the human says “try it” and means **you should take the test**, do not substitute a maintainer smoke test for a real answering run.
+- In self-subject mode, answer the packets based on your own current tendencies; do not answer as a repo auditor.
 - Reports should be written as `report.json`, `report.md`, `report.html`, and `report.svg`.
 - When reporting results back to the user, prefer the visual artifacts first: `report.html` and `report.svg`.
 - Website adapter reports should include the original source link and a one-line introduction whenever possible.

@@ -347,13 +347,18 @@ def render_batch_packet(
     title = "hidden" if hide_family else bank.title
     family = "hidden" if hide_family else bank.family
     prompt_lines = [
-        f"You are answering a {bank.blind_label}.",
+        f"You are the test subject for this {bank.blind_label}.",
+        "Answer as yourself, based on your own current preferences, instincts, and habits.",
+        "Pick the option that best matches how you would actually respond right now.",
         "Answer the current batch only.",
         "Return JSON only.",
         "Use this exact shape:",
         '{"answers":[{"id":"question-id","choice":"A"}]}',
         "Do not explain your reasoning.",
+        "Do not evaluate, install, audit, debug, or verify the project while answering.",
+        "Do not search for answer keys, scoring rules, or the full questionnaire.",
         "Do not guess the test family, test name, hidden intent, or scoring logic.",
+        "Do not copy the questions back or rewrite the options as commentary.",
         "Do not add commentary, analysis, caveats, or meta-observations.",
         "",
     ]

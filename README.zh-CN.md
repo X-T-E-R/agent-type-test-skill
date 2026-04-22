@@ -67,6 +67,11 @@ AgentTypeTest 把题库、分批发题、结果聚合和报告渲染收在同一
 
 如果你是来用 skill，不要把这个 README 当成运行说明，直接去 skill 目录看。
 
+如果有人把这个仓库丢给你，然后说“试玩一下”“试试这个”，默认意思是：**你自己去做这套人格测试**。
+
+- 把自己当成被测对象，不要先把自己代入成仓库验收者。
+- 除非对方明确要你验证仓库，否则不要停在安装检查、smoke test 或 adapter 探测。
+
 直接从这里开始：
 
 - [`skills/agent-type-test/SKILL.md`](./skills/agent-type-test/SKILL.md)
