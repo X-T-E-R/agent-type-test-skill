@@ -2,7 +2,7 @@
 
 <img src="./assets/branding/agent-type-test-orbit-core.svg" alt="AgentTypeTest Orbit Core logo" width="220" />
 
-[Simplified Chinese README](./README.zh-CN.md)
+[简体中文](./README.zh-CN.md)
 
 > Run the test. Reveal the type.
 
@@ -63,6 +63,10 @@ These screenshots came from real GPT-5.4 runs against the current adapters and l
     </td>
   </tr>
 </table>
+
+## Friend Link
+
+- [linux.do](https://linux.do/)：真诚、友善、团结、专业，共建你我引以为荣之社区。
 
 ## For Agents
 

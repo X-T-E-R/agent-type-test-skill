@@ -62,6 +62,10 @@ AgentTypeTest 把题库、分批发题、结果聚合和报告渲染收在同一
   </tr>
 </table>
 
+## 友链
+
+- [linux.do](https://linux.do/)：真诚、友善、团结、专业，共建你我引以为荣之社区。
+
 ## 给 agent
 
 如果你是来用 skill，不要把这个 README 当成运行说明，直接去 skill 目录看。
