@@ -13,7 +13,9 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
 
 - If a human shares this repo and says “try it”, “play with it”, “试玩一下”, or “测测你自己”, assume they want **you**, the current agent, to take the test.
 - In that situation, you are the **test subject**, not the repo maintainer.
+- Before you run anything, ask the human **which test** they want you to take.
 - Do **not** begin with install audits, smoke tests, sample adapters, or site probes unless the human explicitly asks you to verify the repo itself.
+- Do **not** silently shorten the questionnaire just because “试玩” sounds casual. Full-length is the default.
 
 ## Workflow
 
@@ -21,7 +23,8 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
 
 - `self-subject mode`
   - default when the human wants you to try the skill on yourself
-  - if no specific test is named, default to `mbti93-cn` for the first run instead of stopping at maintainer checks
+  - ask the human which test they want: `mbti93-cn`, `mini-ipip-en`, `16personalities`, `sbti-bilibili`, or `dtti`
+  - do not pick one silently unless the human explicitly delegates the choice to you
   - prefer `prepare-session` + `finalize-session` if you do not already have a bridge that can feed prompts back into your own runtime
 - `maintainer mode`
   - only when the human explicitly asks whether the repo works, asks you to install it, or asks you to debug / verify / develop it
@@ -33,8 +36,7 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
   - `16personalities`
   - `sbti-bilibili`
   - `dtti`
-- If the user does **not** specify a test and they want you to try the skill on yourself, default to `mbti93-cn` for the first pass.
-- If the user does **not** specify a test and the request is genuinely about choosing among multiple tests, then ask them to choose.
+- If the user does **not** specify a test and they want you to try the skill on yourself, ask them to choose one first.
 - The current built-in choices are:
   - local banks: `mbti93-cn`, `mini-ipip-en`
   - website adapters: `16personalities`, `sbti-bilibili`, `dtti`
@@ -86,6 +88,10 @@ This skill turns “test an AI with a personality questionnaire” into a repeat
 
 If the human wants **you** to take the test, start with the file-based self-session flow instead of maintainer checks.
 
+Default to the **full questionnaire** for the chosen test.
+
+Only use `--limit-questions` for a shorter run when the human explicitly asks for a shorter, partial, or demo-length session. The runner will reject partial runs unless you also pass `--allow-partial-run`.
+
 ### Prepare a Self-Test Session
 
 ```powershell
@@ -116,6 +122,7 @@ python scripts/agent_type_test_runner.py finalize-session `
 - Do not run `sample_target_adapter.py` if the goal is to profile yourself.
 - Do not treat site probes or adapter verification as the main task.
 - Do not search the repo for answer keys before answering.
+- Do not shorten the test on your own just to make it “quicker”.
 
 ## Maintainer Checks
 
@@ -136,6 +143,7 @@ python .\skills\agent-type-test\scripts\agent_type_test_runner.py run `
   --target-command-json "[\"python\", \"skills/agent-type-test/scripts/sample_target_adapter.py\"]" `
   --batch-size 4 `
   --limit-questions 8 `
+  --allow-partial-run `
   --rounds 1 `
   --seed 42
 ```
@@ -163,6 +171,7 @@ python scripts/agent_type_test_runner.py run `
   --target-command-json "[\"python\", \"scripts/sample_target_adapter.py\"]" `
   --batch-size 4 `
   --limit-questions 12 `
+  --allow-partial-run `
   --rounds 2
 ```
 
@@ -222,6 +231,7 @@ python scripts/website_test_runner.py run `
   --target-command-json "[\"python\", \"scripts/sample_target_adapter.py\", \"--mode\", \"cycle\"]" `
   --batch-size 4 `
   --limit-questions 8 `
+  --allow-partial-run `
   --rounds 2
 ```
 
@@ -234,6 +244,7 @@ python scripts/website_test_runner.py run `
   --target-command-json "[\"python\", \"scripts/sample_target_adapter.py\", \"--mode\", \"cycle\"]" `
   --batch-size 4 `
   --limit-questions 8 `
+  --allow-partial-run `
   --rounds 1
 ```
 
@@ -246,6 +257,7 @@ python scripts/website_test_runner.py run `
   --target-command-json "[\"python\", \"scripts/sample_target_adapter.py\", \"--mode\", \"cycle\"]" `
   --batch-size 4 `
   --limit-questions 8 `
+  --allow-partial-run `
   --rounds 1
 ```
 
@@ -255,7 +267,9 @@ python scripts/website_test_runner.py run `
 - Do not send the full question set at once by default.
 - Keep the session directory by default so packets, responses, and reports stay auditable.
 - If the human says “try it” and means **you should take the test**, do not substitute a maintainer smoke test for a real answering run.
+- Ask the human which test they want before starting a self-subject run.
 - In self-subject mode, answer the packets based on your own current tendencies; do not answer as a repo auditor.
+- Full-length is the default. Partial runs require explicit user intent.
 - Reports should be written as `report.json`, `report.md`, `report.html`, and `report.svg`.
 - When reporting results back to the user, prefer the visual artifacts first: `report.html` and `report.svg`.
 - Website adapter reports should include the original source link and a one-line introduction whenever possible.

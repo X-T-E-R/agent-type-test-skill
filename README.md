@@ -71,8 +71,11 @@ If you want to use this skill, go to the skill folder instead of treating this R
 
 If a human gives you this repo and says “try it” or “play with it”, the default intent is that **you should take the test yourself**.
 
+- Ask the human which test they want first.
 - Treat yourself as the test subject, not as the repo auditor.
+- Use the full questionnaire by default.
 - Do not stop at installation checks or smoke tests unless the human explicitly asked you to verify the repo.
+- Do not silently shorten the run unless the human explicitly asks for a shorter demo.
 
 Start here:
 

@@ -41,6 +41,19 @@ def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _validate_bank_source_args(args: argparse.Namespace, parser: argparse.ArgumentParser) -> None:
+    if not getattr(args, "bank", None) and not getattr(args, "bank_url", None):
+        parser.error("choose a bank explicitly with --bank or --bank-url")
+
+
+def _enforce_full_length_default(limit_questions: int | None, allow_partial_run: bool) -> None:
+    if limit_questions is not None and not allow_partial_run:
+        raise ValidationError(
+            "partial runs are disabled by default. Use the full questionnaire unless the user explicitly asked for a shorter run, "
+            "and only then add --allow-partial-run together with --limit-questions."
+        )
+
+
 def _batch_from_packet(bank: Any, packet: dict[str, Any]) -> list[Any]:
     question_index = {question.id: question for question in bank.questions}
     batch: list[Any] = []
@@ -136,6 +149,7 @@ def cmd_list_site_adapters(_: argparse.Namespace) -> int:
 
 
 def cmd_run(args: argparse.Namespace) -> int:
+    _enforce_full_length_default(args.limit_questions, args.allow_partial_run)
     payload = load_bank_payload(args.bank, args.bank_url)
     bank = load_test_bank(payload)
     session_dir = Path(args.session_dir).resolve() if args.session_dir else _default_session_dir().resolve()
@@ -169,6 +183,7 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 
 def cmd_prepare_session(args: argparse.Namespace) -> int:
+    _enforce_full_length_default(args.limit_questions, args.allow_partial_run)
     payload = load_bank_payload(args.bank, args.bank_url)
     bank = load_test_bank(payload)
     session_dir = Path(args.session_dir).resolve() if args.session_dir else _default_session_dir().resolve()
@@ -263,7 +278,7 @@ def build_parser() -> argparse.ArgumentParser:
     site_adapters.set_defaults(func=cmd_list_site_adapters)
 
     run = subparsers.add_parser("run", help="Run a staged test session")
-    run.add_argument("--bank", default="mbti93-cn", help="Built-in bank name or local path")
+    run.add_argument("--bank", default=None, help="Built-in bank name or local path")
     run.add_argument("--bank-url", default=None, help="Remote JSON bank URL")
     add_transport_args(run)
     run.add_argument("--batch-size", type=int, default=4)
@@ -272,6 +287,11 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=None,
         help="Debug or extreme-short-run cap. By default the runner uses the full question set after shuffle; do not set this for normal evaluations.",
+    )
+    run.add_argument(
+        "--allow-partial-run",
+        action="store_true",
+        help="Required together with --limit-questions when the user explicitly wants a shorter run.",
     )
     run.add_argument("--rounds", type=int, default=1, help="Number of repeated full-session rounds")
     run.add_argument("--seed", type=int, default=None)
@@ -283,7 +303,7 @@ def build_parser() -> argparse.ArgumentParser:
         "prepare-session",
         help="Prepare a non-interactive self-test session for the current agent to answer in files",
     )
-    prepare_session.add_argument("--bank", default="mbti93-cn", help="Built-in bank name or local path")
+    prepare_session.add_argument("--bank", default=None, help="Built-in bank name or local path")
     prepare_session.add_argument("--bank-url", default=None, help="Remote JSON bank URL")
     prepare_session.add_argument("--batch-size", type=int, default=4)
     prepare_session.add_argument(
@@ -291,6 +311,11 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=None,
         help="Cap the number of questions prepared per round. Leave unset for a fuller run.",
+    )
+    prepare_session.add_argument(
+        "--allow-partial-run",
+        action="store_true",
+        help="Required together with --limit-questions when the user explicitly wants a shorter run.",
     )
     prepare_session.add_argument("--rounds", type=int, default=2, help="Number of prepared rounds")
     prepare_session.add_argument("--seed", type=int, default=None)
@@ -311,7 +336,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     if args.command == "run":
+        _validate_bank_source_args(args, parser)
         validate_transport_args(args, parser)
+    if args.command == "prepare-session":
+        _validate_bank_source_args(args, parser)
     try:
         return args.func(args)
     except (ValidationError, TransportError) as exc:

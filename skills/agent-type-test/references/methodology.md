@@ -15,14 +15,14 @@ Default method:
 
 - `batch_size = 4`
 - `rounds = 2` or `3`
-- `limit_questions = 8~20` for quick exploration
-- run the full bank only when you actually want a fuller profile
+- full questionnaire by default
+- use `limit_questions` only when the user explicitly wants a shorter partial run
 
 ## Smoke Test vs Full Test
 
 - smoke test
   - goal: verify that the skill, bank, transport, and reporting pipeline all work
-  - recommended: `rounds = 1`, `limit_questions = 8`, `batch_size = 4`
+  - recommended: `rounds = 1`, `limit_questions = 8`, `batch_size = 4`, and an explicit partial-run opt-in
 - full test
   - goal: inspect aggregate results and stability
   - recommended: `rounds = 2~3`

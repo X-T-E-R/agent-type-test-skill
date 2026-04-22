@@ -94,6 +94,14 @@ def _write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _enforce_full_length_default(limit_questions: int | None, allow_partial_run: bool) -> None:
+    if limit_questions is not None and not allow_partial_run:
+        raise ValidationError(
+            "partial runs are disabled by default. Use the full questionnaire unless the user explicitly asked for a shorter run, "
+            "and only then add --allow-partial-run together with --limit-questions."
+        )
+
+
 def _fetch_text(url: str, timeout: int = 20) -> str:
     request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(request, timeout=timeout) as response:
@@ -1456,6 +1464,7 @@ def _write_report_artifacts(session_dir: Path, report: dict[str, Any]) -> None:
 
 
 def cmd_run(args: argparse.Namespace) -> int:
+    _enforce_full_length_default(args.limit_questions, args.allow_partial_run)
     session_dir = Path(args.session_dir).resolve() if args.session_dir else _default_session_dir(f"website-session-{args.adapter}").resolve()
     session_dir.mkdir(parents=True, exist_ok=True)
     try:
@@ -1497,6 +1506,11 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=None,
         help="Debug or extreme-short-run cap. Default behavior is a full website run; setting this lower triggers partial AI answering and adapter auto-fill for the remaining questions.",
+    )
+    run.add_argument(
+        "--allow-partial-run",
+        action="store_true",
+        help="Required together with --limit-questions when the user explicitly wants a shorter run.",
     )
     run.add_argument("--rounds", type=int, default=1)
     run.add_argument("--seed", type=int, default=None)
